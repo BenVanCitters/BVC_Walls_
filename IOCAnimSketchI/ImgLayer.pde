@@ -1,5 +1,5 @@
 //image tile angles are 60 & 120
-class ImgStrip
+class ImgLayer
 {
   float[] pos;
   float[] vel;
@@ -16,12 +16,12 @@ class ImgStrip
     return new float[]{cos(rad),sin(rad)};
   }
   
-  public ImgStrip(ImgTile[] tiles, float[] dir)
+  public ImgLayer(ImgTile[] tiles, float[] dir)
   {
     imgTiles = tiles;    
     direction = dir;
     
-    float spd = .1 + random(.8);
+    float spd = 3 + random(.8);
     vel = new float[]{direction[0]*spd,direction[1]*spd};
     setStripLen();
   }
@@ -55,7 +55,28 @@ class ImgStrip
   
   void update()
   {
-    
+    for(int i = 0; i < imgTiles.length; i++)
+    {
+      imgTiles[i].update();
+//      imgTiles[i].pos[0] += vel[0];
+//      for(int j = 0; j < vel.length; j++)
+//      {
+//        imgTiles[i].pos[j] += vel[j];  
+//      }
+float vPad = 100;
+float hPad = 100;
+      imgTiles[i].pos[0] += (vel[0]+width+hPad+hPad/2); 
+      imgTiles[i].pos[0] = imgTiles[i].pos[0] % (width+hPad);
+      imgTiles[i].pos[0] -= hPad/2;
+      
+//      imgTiles[i].pos[1] += (vel[1]+height);
+//      imgTiles[i].pos[1] = imgTiles[i].pos[1] % height;
+      
+      imgTiles[i].pos[1] += (vel[1]+height+vPad/2+vPad/2); 
+      imgTiles[i].pos[1] = imgTiles[i].pos[1] % (height+vPad/2);
+      imgTiles[i].pos[1] -= vPad/2;
+      
+    }
   }
   
   void draw()
@@ -65,13 +86,14 @@ class ImgStrip
     float stripLen = 0.f;
     for(int i = 0; i < imgTiles.length; i++)
     {
-      pushMatrix();
-      float t = tm;// % (totalLength);
-      float mvMtVec[] = new float[]{direction[0]*stripLen+vel[0]*t,
-                                    direction[1]*stripLen+vel[1]*t};
+      pushMatrix();      
+      float mvMtVec[] = new float[]{direction[0]*stripLen+vel[0]*tm,
+                                    direction[1]*stripLen+vel[1]*tm};
       
-      translate(mvMtVec[0]%maxOffset[0],
-      mvMtVec[1]%maxOffset[1]);
+//      translate(mvMtVec[0]%maxOffset[0],
+//      mvMtVec[1]%maxOffset[1]);
+      translate(imgTiles[i].pos[0],
+                imgTiles[i].pos[1]);
       imgTiles[i].draw();
       stripLen += imgTiles[i].getEdgeLength();
       popMatrix();

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>38ED5B8B-C82D-459D-8D19-1862B2AA5BE3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>example-flickr</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CBA249B5-E441-4B4C-AC8C-80E81D9D784D</key>
+		<string>https://github.com/WeAreRoyale/IOC_Walls.git</string>
+		<key>D4B5A7DD-E06B-4AB3-8E9B-6AB1666C2521</key>
+		<string>https://github.com/jefftimesten/ofxJSON.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>of_v0.8.0_osx_release/addons/ofxJSON/example-flickr/example-flickr.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CBA249B5-E441-4B4C-AC8C-80E81D9D784D</key>
+		<string>../../../../../..</string>
+		<key>D4B5A7DD-E06B-4AB3-8E9B-6AB1666C2521</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jefftimesten/ofxJSON.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CBA249B5-E441-4B4C-AC8C-80E81D9D784D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CBA249B5-E441-4B4C-AC8C-80E81D9D784D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IOC_Walls</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D4B5A7DD-E06B-4AB3-8E9B-6AB1666C2521</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxJSON</string>
+		</dict>
+	</array>
+</dict>
+</plist>
