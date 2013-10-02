@@ -5,7 +5,8 @@ ImgLayer imgLayers[];
 
 void setup()
 {
-  size((1366+1920),768,P3D);
+//  size((1366+1920),768,P3D);
+  size(1366,768,P3D);
   loadImages();
 }
 
@@ -23,8 +24,8 @@ void loadImages()
   }
   
   
-  imgLayers = new ImgLayer[5];
-  ImgTile imgTiles[][] = new ImgTile[imgLayers.length][children.length*10];
+  imgLayers = new ImgLayer[1];
+  ImgTile imgTiles[][] = new ImgTile[imgLayers.length][children.length];
   
   for(int j = 0; j < imgLayers.length; j++)
   {
@@ -35,7 +36,7 @@ void loadImages()
                                 new float[]{random(width),
                                             random(height)});
     }
-    imgLayers[j] = new ImgLayer(imgTiles[j],getRandRadianDir());
+    imgLayers[j] = new ImgLayer(imgTiles[j],getRandQuantizedRadianDir());
   }
 }
 
@@ -63,7 +64,7 @@ void draw()
   for(int i = 0; i < imgLayers.length; i++)
   {
     translate(0,0,-1);
-    imgLayers[i].update();
+//    imgLayers[i].update();
     imgLayers[i].draw();
   }
   popMatrix();

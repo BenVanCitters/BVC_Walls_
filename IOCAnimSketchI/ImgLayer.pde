@@ -21,7 +21,7 @@ class ImgLayer
     imgTiles = tiles;    
     direction = dir;
     
-    float spd = 3 + random(.8);
+    float spd = .1 + random(.8);
     vel = new float[]{direction[0]*spd,direction[1]*spd};
     setStripLen();
   }
