@@ -15,7 +15,7 @@ void exampleApp::setup()
 		cout  << "Failed to parse JSON\n" << endl;
 	}
 
-	int numImages = MIN(5,response["photos"]["photo"].size());
+	int numImages =response["photos"]["photo"].size();// MAX(5,response["photos"]["photo"].size());
 	for(int i=0; i< numImages; i++) {
 		int farm = response["photos"]["photo"][i]["farm"].asInt();
 		std::string id = response["photos"]["photo"][i]["id"].asString();
@@ -25,6 +25,9 @@ void exampleApp::setup()
 		
 		ofImage img;
 		img.loadImage(url);
+//        string fileName = "snapshot_"+ofToString(10000+i)+".png";
+//		img.saveImage(fileName);
+        
 		images.push_back( img );
 	}
 	
@@ -35,7 +38,7 @@ void exampleApp::draw()
 {
 	ofBackground(0);
     
-	for(int i=0; i<5; i++) {
+	for(int i=0; i<images.size(); i++) {
 		images[i].draw(i*30, i*30);
 	}
 }
