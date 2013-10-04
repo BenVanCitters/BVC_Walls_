@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7ced9fcc5bf62c4915c8d09f62ad86a7 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554e82f6bf0f134ec9bf40aa12f238c7 /* json_reader.cpp */; };
+		841F5DED17FE184F000C8944 /* ofxThreadedImageLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 841F5DEB17FE177C000C8944 /* ofxThreadedImageLoader.cpp */; };
 		9b06c5cae570b630a97e51c38887e84b /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58f8cbf3c566f6908846e5fbf7d0de36 /* json_writer.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
@@ -73,6 +74,8 @@
 		58f8cbf3c566f6908846e5fbf7d0de36 /* json_writer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = json_writer.cpp; path = ../../../addons/ofxJSON/libs/jsoncpp/src/json_writer.cpp; sourceTree = SOURCE_ROOT; };
 		65fcae08d326d7ef1910a329fc1bcc4f /* writer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = writer.h; path = ../../../addons/ofxJSON/libs/jsoncpp/include/json/writer.h; sourceTree = SOURCE_ROOT; };
 		6f94aca14609a0de769d3b91970279f4 /* features.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = features.h; path = ../../../addons/ofxJSON/libs/jsoncpp/include/json/features.h; sourceTree = SOURCE_ROOT; };
+		841F5DEB17FE177C000C8944 /* ofxThreadedImageLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxThreadedImageLoader.cpp; sourceTree = "<group>"; };
+		841F5DEC17FE177C000C8944 /* ofxThreadedImageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxThreadedImageLoader.h; sourceTree = "<group>"; };
 		98169aec4e990dbdf3275463650ffd78 /* config.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = config.h; path = ../../../addons/ofxJSON/libs/jsoncpp/include/json/config.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -165,6 +168,23 @@
 			name = json;
 			sourceTree = "<group>";
 		};
+		841F5DE917FE177C000C8944 /* ofxThreadedImageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				841F5DEA17FE177C000C8944 /* src */,
+			);
+			path = ofxThreadedImageLoader;
+			sourceTree = "<group>";
+		};
+		841F5DEA17FE177C000C8944 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				841F5DEB17FE177C000C8944 /* ofxThreadedImageLoader.cpp */,
+				841F5DEC17FE177C000C8944 /* ofxThreadedImageLoader.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		977a836dd2c489ccc5e330fff7b818bd /* jsoncpp */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +197,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				841F5DE917FE177C000C8944 /* ofxThreadedImageLoader */,
 				2865daef86b1907a704ca70bc58ce980 /* ofxJSON */,
 			);
 			name = addons;
@@ -315,6 +336,8 @@
 /* Begin PBXProject section */
 		E4B69B4C0A3A1720003C02F2 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "example-flickr" */;
 			compatibilityVersion = "Xcode 2.4";
 			developmentRegion = English;
@@ -378,6 +401,7 @@
 				7ced9fcc5bf62c4915c8d09f62ad86a7 /* json_reader.cpp in Sources */,
 				ae32f1807796b1050e082651a5fbf40d /* json_value.cpp in Sources */,
 				9b06c5cae570b630a97e51c38887e84b /* json_writer.cpp in Sources */,
+				841F5DED17FE184F000C8944 /* ofxThreadedImageLoader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
