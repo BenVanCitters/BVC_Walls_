@@ -11,6 +11,7 @@ public:
     void setup();
     void draw();
     void buildDiamondMesh(/*ofImage texture*/);
+    void keyPressed(int key);
     
     ofxJSONElement  response;
     ofxJSONElement  response2;

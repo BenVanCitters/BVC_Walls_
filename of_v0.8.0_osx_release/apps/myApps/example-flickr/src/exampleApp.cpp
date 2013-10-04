@@ -141,3 +141,11 @@ void exampleApp::buildDiamondMesh(/*ofImage texture*/)
 
 	vboMesh = mesh;
 }
+
+//--------------------------------------------------------------
+void exampleApp::keyPressed(int key){
+	if(key == ' ') {
+		ofToggleFullscreen();
+	}
+}
+
