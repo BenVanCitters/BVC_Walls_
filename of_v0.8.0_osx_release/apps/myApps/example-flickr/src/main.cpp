@@ -1,6 +1,6 @@
-#include "exampleApp.h"
+#include "IOCWallApp.h"
 
 int main() {
 	ofSetupOpenGL(1366+1920,1080,OF_WINDOW);
-	ofRunApp(new exampleApp());
+	ofRunApp(new IOCWallApp());
 }
