@@ -59,7 +59,7 @@ void IOCWallApp::updateImages(int queries, bool refresh)
         int randomDay = 1+(int)ofRandom(28);
         int randomMonth = 1+(int)ofRandom(12);
 // 	  std::string url = "http://www.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=76fee119f6a01912ef7d32cbedc761bb&format=json&nojsoncallback=1&date=";
-        std::string url = "http://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=e3b3f4b8eaaada75c02b27cffb9ec025&format=json&nojsoncallback=1&date=";
+        std::string url = "http://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=76fee119f6a01912ef7d32cbedc761bb&format=json&nojsoncallback=1&date=";
         
         std::stringstream sstm;
         sstm <<url << randomYear << "-";
@@ -74,9 +74,11 @@ void IOCWallApp::updateImages(int queries, bool refresh)
             cout  << "Failed to parse JSON\n" << endl;
         }
         
-        int numImages =response["photos"]["photo"].size();// MAX(5,response["photos"]["photo"].size());
+        int numImages =response["photos"]["photo"].size();
 
-//            images.resize(200);//images.size()+numImages2);
+        
+        if(numImages < 1)
+            ofLog(OF_LOG_NOTICE, response.getRawString());
 
         ofLog(OF_LOG_NOTICE, "numImages %d",numImages);
         for(int i=0; i< numImages; i++) {
@@ -124,18 +126,7 @@ void IOCWallApp::buildDiamondMesh(/*ofImage texture*/)
     
 	ofVec3f zero(0, 0, 0);
     
-    /*
-     texCoords = new float[][]{{.5,0},
-     {.5+.5/sqrt(3),.5},
-     {.5,1},
-     {.5-.5/sqrt(3),.5}};
-     
-     posCoords = new float[][]{{0,0},
-     {.5/sqrt(3),.5},
-     {0,1},
-     {-.5/sqrt(3),.5}};
-     */
-//
+
     float scaling = 300;
     mesh.addVertex(ofVec3f(0,0,0));
     mesh.addTexCoord(ofVec3f(.5,0,0));
