@@ -1,4 +1,4 @@
-float[][] shape;
+  float[][] shape;
 float[][] texCoords;
 PImage tex1;
 PImage tex2;
@@ -6,6 +6,7 @@ PImage tex2;
 void setup()
 {
   size(500,500,P3D);
+  ortho();
   tex1 = loadImage("1.jpg");
   tex2 = loadImage("2.jpg");
   initShape(80,120,0);
@@ -56,7 +57,7 @@ void draw()
 {
   lights();
   
-  background(255);
+  background(255,0,0);
   
   float tm = -(millis()/1000.f);
   

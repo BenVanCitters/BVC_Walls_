@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		7ced9fcc5bf62c4915c8d09f62ad86a7 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 554e82f6bf0f134ec9bf40aa12f238c7 /* json_reader.cpp */; };
 		841F5DED17FE184F000C8944 /* ofxThreadedImageLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 841F5DEB17FE177C000C8944 /* ofxThreadedImageLoader.cpp */; };
-		8478CA1917FF92AA003A0995 /* JSONThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8478CA1717FF92AA003A0995 /* JSONThread.cpp */; };
+		84942F55180368ED0004B21F /* TileLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84942F53180368ED0004B21F /* TileLayer.cpp */; };
 		9b06c5cae570b630a97e51c38887e84b /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58f8cbf3c566f6908846e5fbf7d0de36 /* json_writer.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
@@ -77,8 +77,11 @@
 		6f94aca14609a0de769d3b91970279f4 /* features.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = features.h; path = ../../../addons/ofxJSON/libs/jsoncpp/include/json/features.h; sourceTree = SOURCE_ROOT; };
 		841F5DEB17FE177C000C8944 /* ofxThreadedImageLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxThreadedImageLoader.cpp; sourceTree = "<group>"; };
 		841F5DEC17FE177C000C8944 /* ofxThreadedImageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxThreadedImageLoader.h; sourceTree = "<group>"; };
-		8478CA1717FF92AA003A0995 /* JSONThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONThread.cpp; sourceTree = "<group>"; };
-		8478CA1817FF92AA003A0995 /* JSONThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONThread.h; sourceTree = "<group>"; };
+		8478CA1817FF92AA003A0995 /* JSONThread1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONThread1.h; sourceTree = "<group>"; };
+		84942F51180347E30004B21F /* JSONThread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONThread.h; sourceTree = "<group>"; };
+		84942F52180361100004B21F /* threadedObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = threadedObject.h; sourceTree = "<group>"; };
+		84942F53180368ED0004B21F /* TileLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TileLayer.cpp; sourceTree = "<group>"; };
+		84942F54180368ED0004B21F /* TileLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileLayer.h; sourceTree = "<group>"; };
 		84E4CD2117FF9F0E0038A8DE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = IOCWall/Images.xcassets; sourceTree = "<group>"; };
 		98169aec4e990dbdf3275463650ffd78 /* config.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = config.h; path = ../../../addons/ofxJSON/libs/jsoncpp/include/json/config.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
@@ -274,8 +277,11 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* IOCWallApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* IOCWallApp.h */,
-				8478CA1717FF92AA003A0995 /* JSONThread.cpp */,
-				8478CA1817FF92AA003A0995 /* JSONThread.h */,
+				8478CA1817FF92AA003A0995 /* JSONThread1.h */,
+				84942F51180347E30004B21F /* JSONThread.h */,
+				84942F52180361100004B21F /* threadedObject.h */,
+				84942F53180368ED0004B21F /* TileLayer.cpp */,
+				84942F54180368ED0004B21F /* TileLayer.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -403,7 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
-				8478CA1917FF92AA003A0995 /* JSONThread.cpp in Sources */,
+				84942F55180368ED0004B21F /* TileLayer.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* IOCWallApp.cpp in Sources */,
 				bedfee7400c58ea4e412b757bd605a7b /* ofxJSONElement.cpp in Sources */,
 				7ced9fcc5bf62c4915c8d09f62ad86a7 /* json_reader.cpp in Sources */,
