@@ -40,8 +40,8 @@ void TileLayer::draw()
     
     int winWidth = ofGetWindowWidth();
     int winHeight = ofGetWindowWidth();
-	for(int i=0; i<images.size(); i++) {
-        if(images[i].width + images[i].height > 0)
+	for(int i=0; i<mImages.size(); i++) {
+        if(mImages[i].width + mImages[i].height > 0)
         {
             //            images[i].draw(i*55%winWidth, i*30%winHeight);
             ofPushMatrix();
@@ -49,9 +49,9 @@ void TileLayer::draw()
             ofTranslate(i*55%winWidth, i*5%winHeight); // position the current mesh
             ofRotateX((ofGetElapsedTimef() +i)* 30); // slowly rotate the model
             ofRotateY((ofGetElapsedTimef() +i*1.1)* 10);
-            images[i].bind();
-            vboMesh.draw();
-            images[i].unbind();
+            mImages[i].bind();
+            mVboMesh.draw();
+            mImages[i].unbind();
             ofPopMatrix();
         }
     }
@@ -107,7 +107,7 @@ void TileLayer::updateImages(int queries, bool refresh)
             imgUrlVector.push_back(url);
             ofImage img;
             if(!refresh)
-                images.push_back(img);
+                mImages.push_back(img);
             
             //            ofLog(OF_LOG_NOTICE,"images[%d]: %p",(i+currentSize),&images[i+currentSize]);
             //        string fileName = "snapshot_"+ofToString(10000+i)+".png";
@@ -119,10 +119,10 @@ void TileLayer::updateImages(int queries, bool refresh)
     {
         if(refresh)
         {
-            int randIndex = (int)ofRandom(images.size());
-            loader.loadFromURL(images[randIndex],imgUrlVector[i]);
+            int randIndex = (int)ofRandom(mImages.size());
+            mLoader.loadFromURL(mImages[randIndex],imgUrlVector[i]);
         }else{
-            loader.loadFromURL(images[i],imgUrlVector[i]);
+            mLoader.loadFromURL(mImages[i],imgUrlVector[i]);
         }
     }
 }
@@ -137,7 +137,7 @@ void TileLayer::loadImages(std::vector<std::string> imgUrlVector)
     for(int i = 0; i < imgUrlVector.size(); i++)
     {
         ofImage img;
-        images.push_back(img);
+        mImages.push_back(img);
     }
     
     for(int i = 0; i < imgUrlVector.size(); i++)
@@ -146,7 +146,7 @@ void TileLayer::loadImages(std::vector<std::string> imgUrlVector)
         {
             
             //            int randIndex = (int)ofRandom(images.size());
-            loader.loadFromURL(images[i],imgUrlVector[i]);
+            mLoader.loadFromURL(mImages[i],imgUrlVector[i]);
             //        }else{
             //            loader.loadFromURL(images[i],imgUrlVector[i]);
         }
@@ -180,7 +180,7 @@ void TileLayer::buildDiamondMesh(/*ofImage texture*/)
     mesh.addVertex(ofVec3f(0,scaling*1,0));
     mesh.addTexCoord(ofVec3f(.5,1,0));
     
-	vboMesh = mesh;
+	mVboMesh = mesh;
 }
 
 

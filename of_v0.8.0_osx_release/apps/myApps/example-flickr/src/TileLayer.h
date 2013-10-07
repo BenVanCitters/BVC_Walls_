@@ -16,9 +16,9 @@
 
 class TileLayer
 {
-    ofVboMesh vboMesh;
-    std::vector<ofImage> images;
-    ofxThreadedImageLoader loader;
+    ofVboMesh mVboMesh;
+    std::vector<ofImage> mImages;
+    ofxThreadedImageLoader mLoader;
     
 public:
     TileLayer();
