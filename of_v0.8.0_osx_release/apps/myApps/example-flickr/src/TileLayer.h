@@ -19,9 +19,14 @@ class TileLayer
     ofVboMesh mVboMesh;
     std::vector<ofImage> mImages;
     ofxThreadedImageLoader mLoader;
+    std::vector<float> mXTerminations;
+    std::vector<float> mYTerminations;
     
 public:
+    
     TileLayer();
+    void testURL();
+    
     void draw();
     void updateImages(int queries, bool refresh);
     void loadImages(std::vector<std::string> imgUrlVector);
