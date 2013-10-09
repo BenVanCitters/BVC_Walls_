@@ -8,16 +8,17 @@
 
 #include "TileLayer.h"
 #include "ofxJSONElement.h"
-
-#include "threadedObject.h"
-#include "JSONThread1.h"
+//
+//#include "threadedObject.h"
+//#include "JSONThread1.h"
 
 TileLayer::TileLayer()
 {
-	buildDiamondMesh();
+    
+//	buildDiamondMesh();
 	
     testURL();
-//	updateImages(3,false);
+//	updateImages(1,false);
     
     //    JSONThread1 fJS;
     ////    fJS.loadThreaded(/*&images,*/ false, response, 5, loader);
@@ -30,6 +31,7 @@ TileLayer::TileLayer()
     //    thread.start();
 }
 
+
 void TileLayer::draw()
 {
     ofEnableDepthTest();
@@ -39,21 +41,12 @@ void TileLayer::draw()
     
     int winWidth = ofGetWindowWidth();
     int winHeight = ofGetWindowWidth();
-	for(int i=0; i<mImages.size(); i++) {
-        if(mImages[i].width + mImages[i].height > 0)
-        {
-//            images[i].draw(i*55%winWidth, i*30%winHeight);
-            ofPushMatrix();
-            
-            ofTranslate(i*55%winWidth, i*5%winHeight); // position the current mesh
-            ofRotateX((ofGetElapsedTimef() +i)* 30); // slowly rotate the model
-            ofRotateY((ofGetElapsedTimef() +i*1.1)* 10);
-            mImages[i].bind();
-            mVboMesh.draw();
-            mImages[i].unbind();
-            ofPopMatrix();
-        }
+	
+    for(int i=0; i<mTiles.size(); i++)
+    {
+        mTiles[i].draw(i);
     }
+    
     ofDisableDepthTest();
     
     // draw the framerate in the top left corner
@@ -72,36 +65,45 @@ void TileLayer::testURL()
     if (!response.open(jsonURL)) {
         cout  << "Failed to parse JSON\n" << endl;
     }
+    
     int fields  =response.size();
+    if(fields < 1)
+    {
+       ofLog(OF_LOG_ERROR, response.getRawString());
+    }
+    
     for(int i=0; i< fields; i++)
     {
+        std::string content  = response[i]["content"].asString();
+        std::string real_name  = response[i]["real_name"].asString();
+        std::string screen_name  = response[i]["screen_name"].asString();
+        uint64 timestamp  = response[i]["timestamp"].asUInt64();
         
         int imageCount = response[i]["images"].size();
-        cout << "imageCount: " << imageCount << endl;
+//        cout << "content: " << content << endl << " real_name: " << real_name << endl << " screen_name: " << screen_name << endl << " timestamp: " << timestamp << endl;
         for(int j=0; j< imageCount; j++)
         {
             std::string url  = response[i]["images"][j].asString();
+            
             cout << url << endl;
-            ofImage img;
-            mImages.push_back(img);
+            DiamondTile tile;
+            mTiles.push_back(tile);
             imgUrlVector.push_back(url);
         }
     }
     
-    
     for(int i = 0; i < imgUrlVector.size(); i++)
     {
-
-            mLoader.loadFromURL(mImages[i],imgUrlVector[i]);
+        mLoader.loadFromURL(mTiles[i].mImage, imgUrlVector[i]);
+        mTiles[i].buildDiamondMesh();
     }
-    ofLog(OF_LOG_NOTICE, response.getRawString());
 }
 
 
 void TileLayer::updateImages(int queries, bool refresh)
 {
     ofxJSONElement  response;
-    int currentSize = 0;
+//    int currentSize = 0;
     
     std::vector<std::string> imgUrlVector;
     for(int j = 0; j < queries; j++)
@@ -133,7 +135,6 @@ void TileLayer::updateImages(int queries, bool refresh)
         ofLog(OF_LOG_NOTICE, "numImages %d",numImages);
         for(int i=0; i< numImages; i++)
         {
-            
             int farm = response["photos"]["photo"][i]["farm"].asInt();
             std::string id = response["photos"]["photo"][i]["id"].asString();
             std::string secret = response["photos"]["photo"][i]["secret"].asString();
@@ -141,83 +142,40 @@ void TileLayer::updateImages(int queries, bool refresh)
             std::string url = "http://farm"+ofToString(farm)+".static.flickr.com/"+server+"/"+id+"_"+secret+".jpg";
             //            ofLog(OF_LOG_NOTICE, "url " + url);
             imgUrlVector.push_back(url);
-            ofImage img;
+            DiamondTile tile;
             if(!refresh)
-                mImages.push_back(img);
-            
+            {
+                mTiles.push_back(tile);
+                
+            }
             //            ofLog(OF_LOG_NOTICE,"images[%d]: %p",(i+currentSize),&images[i+currentSize]);
             //        string fileName = "snapshot_"+ofToString(10000+i)+".png";
             //		img.saveImage(fileName);
         }
-        currentSize+=numImages;
+//        currentSize+=numImages;
     }
+    
     for(int i = 0; i < imgUrlVector.size(); i++)
     {
-        if(refresh)
-        {
-            int randIndex = (int)ofRandom(mImages.size());
-            mLoader.loadFromURL(mImages[randIndex],imgUrlVector[i]);
-        }else{
-            mLoader.loadFromURL(mImages[i],imgUrlVector[i]);
-        }
+//        mTiles[i].loadImage(&mLoaders[i],imgUrlVector[i]);
+//        if(refresh)
+//        {
+//            int randIndex = (int)ofRandom(mTiles());
+////            mLoader.loadFromURL(mTiles[randIndex].mImage,imgUrlVector[i]);
+//        }else{
+            cout << "url: " << imgUrlVector[i] << endl;
+            mLoader.loadFromURL(mTiles[i].mImage, imgUrlVector[i]);
+            mTiles[i].buildDiamondMesh();
+//        }
     }
 }
-
-//void TileLayer::finishedLoadingURLs(std::vector<std::string> imgUrlVector)
-//{
-//    ofLog(OF_LOG_NOTICE,"finishedLoadingURLs");
-//}
 
 void TileLayer::loadImages(std::vector<std::string> imgUrlVector)
 {
-    for(int i = 0; i < imgUrlVector.size(); i++)
-    {
-        ofImage img;
-        mImages.push_back(img);
-    }
-    
-    for(int i = 0; i < imgUrlVector.size(); i++)
-    {
-//        if(refresh)
-        {
-            
-//            int randIndex = (int)ofRandom(images.size());
-            mLoader.loadFromURL(mImages[i],imgUrlVector[i]);
-//        }else{
-//            loader.loadFromURL(images[i],imgUrlVector[i]);
-        }
-    }
+
 }
 
-void TileLayer::buildDiamondMesh(/*ofImage texture*/)
-{
-    ofMesh mesh;
-	// OF_PRIMITIVE_TRIANGLES means every three vertices create a triangle
-	mesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
-    //	int skip = 10;	// this controls the resolution of the mesh
-	
-    //	int width = texture.getWidth();
-    //	int height = texture.getHeight();
-    //	ofVec2f imageSize(width,height);
-    
-	ofVec3f zero(0, 0, 0);
-    
-    
-    float scaling = 300;
-    mesh.addVertex(ofVec3f(0,0,0));
-    mesh.addTexCoord(ofVec3f(.5,0,0));
-    
-    mesh.addVertex(ofVec3f(scaling*.5/sqrt(3),scaling*.5,0));
-    mesh.addTexCoord(ofVec3f(.5+.5/sqrt(3),.5,0));
-    
-    mesh.addVertex(ofVec3f(scaling*-.5/sqrt(3),scaling*.5,0));
-    mesh.addTexCoord(ofVec3f(.5-.5/sqrt(3),.5,0));
-    
-    mesh.addVertex(ofVec3f(0,scaling*1,0));
-    mesh.addTexCoord(ofVec3f(.5,1,0));
-    
-	mVboMesh = mesh;
-}
+
 
 
 

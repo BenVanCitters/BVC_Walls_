@@ -8,6 +8,7 @@
 
 #include "ofMain.h"
 #include "TileLayer.h"
+#include "ofxJSONElement.h"
 
 #ifndef __example_flickr__JSONThread__
 #define __example_flickr__JSONThread__

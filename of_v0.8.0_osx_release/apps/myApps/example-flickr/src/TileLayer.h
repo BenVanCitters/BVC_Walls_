@@ -10,17 +10,18 @@
 #define __IOCWall__TileLayer__
 
 #include "ofMain.h"
-
+#include "DiamondTile.h"
 #include "ofxThreadedImageLoader.h"
+
 #include <iostream>
 
 class TileLayer
 {
-    ofVboMesh mVboMesh;
-    std::vector<ofImage> mImages;
+    std::vector<DiamondTile> mTiles;
     ofxThreadedImageLoader mLoader;
     std::vector<float> mXTerminations;
     std::vector<float> mYTerminations;
+    ofVboMesh mVboMesh;
     
 public:
     
@@ -30,8 +31,6 @@ public:
     void draw();
     void updateImages(int queries, bool refresh);
     void loadImages(std::vector<std::string> imgUrlVector);
-    void buildDiamondMesh(/*ofImage texture*/);
-    void finishedLoadingURLs(std::vector<std::string> imgUrlVector);
 };
 
 #endif /* defined(__IOCWall__TileLayer__) */
