@@ -7,9 +7,15 @@ void IOCWallApp::setup()
 
 }
 
+void IOCWallApp::update()
+{
+    mTileLayer.update();
+}
+
 //------------------------------------------------------------------------------
 void IOCWallApp::draw()
 {
+
     mTileLayer.draw();
 }
 
@@ -26,6 +32,10 @@ void IOCWallApp::mousePressed(int x, int y, int button){
     cout << "mousePressed: " << x << ", " << y << " button: " << button << endl;
 }
 
+void IOCWallApp::mouseMoved(int x, int y)
+{
+    mTileLayer.setMouseXY(x,y);
+}
 
 void IOCWallApp::exit() {
     

@@ -17,8 +17,8 @@ TileLayer::TileLayer()
     
 //	buildDiamondMesh();
 	
-    testURL();
-//	updateImages(1,false);
+//    testURL();
+	updateImages(3,false);
     
     //    JSONThread1 fJS;
     ////    fJS.loadThreaded(/*&images,*/ false, response, 5, loader);
@@ -51,6 +51,11 @@ void TileLayer::draw()
     
     // draw the framerate in the top left corner
 	ofDrawBitmapString(ofToString((int) ofGetFrameRate()) + " fps", 10, 20);
+}
+
+void TileLayer::update()
+{
+    
 }
 
 void TileLayer::testURL()
@@ -86,7 +91,10 @@ void TileLayer::testURL()
             std::string url  = response[i]["images"][j].asString();
             
             cout << url << endl;
-            DiamondTile tile;
+            
+            DiamondTile tile( ofVec3f(ofRandom(ofGetWindowWidth()),ofRandom(ofGetWindowWidth())),
+                             ofVec2f(ofRandom(500),ofRandom(500)),
+                             ofVec2f(ofRandom(700),ofRandom(700)));
             mTiles.push_back(tile);
             imgUrlVector.push_back(url);
         }
@@ -102,7 +110,7 @@ void TileLayer::testURL()
 
 void TileLayer::updateImages(int queries, bool refresh)
 {
-    ofxJSONElement  response;
+    ofxJSONElement response;
 //    int currentSize = 0;
     
     std::vector<std::string> imgUrlVector;
@@ -142,7 +150,9 @@ void TileLayer::updateImages(int queries, bool refresh)
             std::string url = "http://farm"+ofToString(farm)+".static.flickr.com/"+server+"/"+id+"_"+secret+".jpg";
             //            ofLog(OF_LOG_NOTICE, "url " + url);
             imgUrlVector.push_back(url);
-            DiamondTile tile;
+            DiamondTile tile( ofVec3f(ofRandom(ofGetWindowWidth()),ofRandom(ofGetWindowWidth())),
+                              ofVec2f(ofRandom(500),ofRandom(500)),
+                              ofVec2f(ofRandom(700),ofRandom(700)));
             if(!refresh)
             {
                 mTiles.push_back(tile);
@@ -175,6 +185,13 @@ void TileLayer::loadImages(std::vector<std::string> imgUrlVector)
 
 }
 
+void TileLayer::setMouseXY(int x, int y)
+{
+    for(int i=0; i<mTiles.size(); i++)
+    {
+        mTiles[i].updateMouse(x, y);
+    }
+}
 
 
 

@@ -18,12 +18,21 @@ class DiamondTile
 public:
     ofVboMesh mVboMesh;
     ofImage mImage;
-//    ofxThreadedImageLoader* mLoader;
     ofVec3f mPos;
     
+    ofVec2f mStartDim;
+    ofVec2f mEndDim;
+    
+    float mAnimDuration;
+    float mAnimOffset;
+    
+
     DiamondTile();
-    DiamondTile(ofVec3f pos);
+    DiamondTile(ofVec3f pos, ofVec2f startDim, ofVec2f endDim);
+    void update();
     void buildDiamondMesh();
+    void setupDims();
+    void updateMouse(int xDim, int yDim);
     void draw(int i);
     void loadImage(ofxThreadedImageLoader* loader, string url);
 };
