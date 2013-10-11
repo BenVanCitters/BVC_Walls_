@@ -17,24 +17,32 @@ class DiamondTile
 {
 public:
     ofVboMesh mVboMesh;
+    string mImgURL;
     ofImage mImage;
     ofVec3f mPos;
     
     ofVec2f mStartDim;
     ofVec2f mEndDim;
     
+    ofVec2f mStartTexPos[4];
+    ofVec2f mEndTexPos[4];
+    
     float mAnimDuration;
     float mAnimOffset;
     
+    static const ofVec3f verts[4];
+    static ofVec3f leg1Dir;
+    static ofVec3f leg2Dir;
 
     DiamondTile();
     DiamondTile(ofVec3f pos, ofVec2f startDim, ofVec2f endDim);
-    void update();
+    void update(float tm);
     void buildDiamondMesh();
-    void setupDims();
+    void setupDims(ofVec2f currentDim);
     void updateMouse(int xDim, int yDim);
     void draw(int i);
     void loadImage(ofxThreadedImageLoader* loader, string url);
+    void checkTexCoords();
 };
 
 #endif /* defined(__IOCWall__DiamondTile__) */

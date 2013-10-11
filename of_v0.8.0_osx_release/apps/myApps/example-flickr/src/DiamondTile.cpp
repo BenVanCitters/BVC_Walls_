@@ -21,38 +21,74 @@ DiamondTile::DiamondTile(ofVec3f pos, ofVec2f startDim, ofVec2f endDim)
     mAnimDuration = 4.f;
     mAnimOffset = ofRandom(mAnimDuration);
     
-    setupDims();
+//    setupDims();
+    update(0);
 }
 
-void DiamondTile::update()
+void DiamondTile::update(float tm)
+{
+    float myTm = tm+mAnimOffset;
+    float tween = (cos(TWO_PI* myTm/mAnimDuration) + 1)/2;
+    ofVec2f dim = tween*mStartDim + (1-tween)*mEndDim;
+    setupDims(dim);
+}
+
+void DiamondTile::checkTexCoords()
 {
     
+    if(mImage.width+mImage.height > 0)
+    {
+        float startArea = (leg1Dir*mStartDim.x).crossed(leg2Dir*mStartDim.y).length();
+        float startW = abs((leg1Dir*mStartDim.x - leg2Dir*mStartDim.y).x);
+        float startH = (leg1Dir*mStartDim.x+leg2Dir*mStartDim.y).length();
+        float startVWToH = startW/startH;
+
+        float endArea = (leg1Dir*mEndDim.x).crossed(leg2Dir*mEndDim.y).length();
+        float endW = abs((leg1Dir*mEndDim.x - leg2Dir*mEndDim.y).x);
+        float endH = (leg1Dir*mEndDim.x+leg2Dir*mEndDim.y).length();
+        float endVWToH = (mEndDim.x*leg1Dir).length()/(mEndDim.y*leg2Dir).length();
+        
+        float imgWToH = mImage.width*1.f/mImage.height;
+        
+        if (startVWToH < 1 && endVWToH < 1)
+        {
+//            max
+        }
+        
+        
+        mVboMesh.setTexCoord(0, ofVec3f(0,0));
+        mVboMesh.setTexCoord(1, leg1Dir*mStartTexPos[0].x);
+        mVboMesh.setTexCoord(2, leg2Dir*mStartTexPos[0].y);
+        mVboMesh.setTexCoord(3, (leg1Dir*mStartTexPos[0].x+leg2Dir*mStartTexPos[0].y));
+    }
 }
 
-void DiamondTile::setupDims()
+
+ofVec3f const DiamondTile::verts[4] = {ofVec3f(0.f,0.f,0.f),
+                                       ofVec3f(.5f/sqrt(3.f),.5f,0.f),
+                                       ofVec3f(-.5f/sqrt(3.f),.5f,0.f),
+                                       ofVec3f(0.f,1.f,0.f)};
+ofVec3f DiamondTile::leg1Dir = (verts[1] - verts[0]).normalize();
+ofVec3f DiamondTile::leg2Dir = (verts[2] - verts[0]).normalize();
+
+
+void DiamondTile::setupDims(ofVec2f currentDim)
 {
-    ofVec3f verts[4] = {ofVec3f(0,0,0),
-                        ofVec3f(.5/sqrt(3),.5,0),
-                        ofVec3f(-.5/sqrt(3),.5,0),
-                        ofVec3f(0,1,0)};
-    ofVec3f leg1Dir = verts[1] - verts[0];
-    leg1Dir = leg1Dir.normalize() * mStartDim.x;
-    ofVec3f leg2Dir = verts[2] - verts[0];
-    leg2Dir = leg2Dir.normalize() * mStartDim.y;
-    std::vector<ofVec3f> meshVerts = mVboMesh.getVertices();
+    
+//    std::vector<ofVec3f> meshVerts = mVboMesh.getVertices();
     if(mVboMesh.getVertices().size() > 3)
     {
         mVboMesh.setVertex(0, ofVec3f(0,0));
-        mVboMesh.setVertex(1, leg1Dir);
-        mVboMesh.setVertex(2, leg2Dir);
-        mVboMesh.setVertex(3, leg1Dir+leg2Dir);
+        mVboMesh.setVertex(1, leg1Dir*currentDim.x);
+        mVboMesh.setVertex(2, leg2Dir*currentDim.y);
+        mVboMesh.setVertex(3, (leg1Dir*currentDim.x+leg2Dir*currentDim.y));
     }
 }
 
 void DiamondTile::updateMouse(int xDim, int yDim)
 {
 //    mStartDim = ofVec2f(xDim,yDim);
-    setupDims();
+//    setupDims();
 }
 
 void DiamondTile::buildDiamondMesh()
@@ -96,7 +132,7 @@ void DiamondTile::loadImage(ofxThreadedImageLoader* loader, string url)
 
 void DiamondTile::draw(int i)
 {
-    setupDims();
+//    setupDims();
     
     ofPushMatrix();
     

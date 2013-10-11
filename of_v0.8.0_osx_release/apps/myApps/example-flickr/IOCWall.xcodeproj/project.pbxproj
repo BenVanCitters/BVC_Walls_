@@ -11,6 +11,8 @@
 		841F5DED17FE184F000C8944 /* ofxThreadedImageLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 841F5DEB17FE177C000C8944 /* ofxThreadedImageLoader.cpp */; };
 		848AB3FB180498EC000D21E3 /* DiamondTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 848AB3F71804857F000D21E3 /* DiamondTile.cpp */; };
 		84942F55180368ED0004B21F /* TileLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84942F53180368ED0004B21F /* TileLayer.cpp */; };
+		84BFB15818075C9400B23BDA /* TileSetter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84BFB15618075C9400B23BDA /* TileSetter.cpp */; };
+		84BFB15F18075CDA00B23BDA /* TileSetTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84BFB15D18075CDA00B23BDA /* TileSetTile.cpp */; };
 		9b06c5cae570b630a97e51c38887e84b /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58f8cbf3c566f6908846e5fbf7d0de36 /* json_writer.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
@@ -85,6 +87,10 @@
 		84942F52180361100004B21F /* threadedObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = threadedObject.h; sourceTree = "<group>"; };
 		84942F53180368ED0004B21F /* TileLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TileLayer.cpp; sourceTree = "<group>"; };
 		84942F54180368ED0004B21F /* TileLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileLayer.h; sourceTree = "<group>"; };
+		84BFB15618075C9400B23BDA /* TileSetter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TileSetter.cpp; sourceTree = "<group>"; };
+		84BFB15718075C9400B23BDA /* TileSetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileSetter.h; sourceTree = "<group>"; };
+		84BFB15D18075CDA00B23BDA /* TileSetTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TileSetTile.cpp; sourceTree = "<group>"; };
+		84BFB15E18075CDA00B23BDA /* TileSetTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileSetTile.h; sourceTree = "<group>"; };
 		84E4CD2117FF9F0E0038A8DE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = IOCWall/Images.xcassets; sourceTree = "<group>"; };
 		98169aec4e990dbdf3275463650ffd78 /* config.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = config.h; path = ../../../addons/ofxJSON/libs/jsoncpp/include/json/config.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
@@ -205,6 +211,17 @@
 			name = thread;
 			sourceTree = "<group>";
 		};
+		84BFB15918075CB200B23BDA /* TileSetter */ = {
+			isa = PBXGroup;
+			children = (
+				84BFB15618075C9400B23BDA /* TileSetter.cpp */,
+				84BFB15718075C9400B23BDA /* TileSetter.h */,
+				84BFB15D18075CDA00B23BDA /* TileSetTile.cpp */,
+				84BFB15E18075CDA00B23BDA /* TileSetTile.h */,
+			);
+			name = TileSetter;
+			sourceTree = "<group>";
+		};
 		977a836dd2c489ccc5e330fff7b818bd /* jsoncpp */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +312,7 @@
 				84942F54180368ED0004B21F /* TileLayer.h */,
 				848AB3F71804857F000D21E3 /* DiamondTile.cpp */,
 				848AB3F81804857F000D21E3 /* DiamondTile.h */,
+				84BFB15918075CB200B23BDA /* TileSetter */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -421,8 +439,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84BFB15F18075CDA00B23BDA /* TileSetTile.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				84942F55180368ED0004B21F /* TileLayer.cpp in Sources */,
+				84BFB15818075C9400B23BDA /* TileSetter.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* IOCWallApp.cpp in Sources */,
 				848AB3FB180498EC000D21E3 /* DiamondTile.cpp in Sources */,
 				bedfee7400c58ea4e412b757bd605a7b /* ofxJSONElement.cpp in Sources */,

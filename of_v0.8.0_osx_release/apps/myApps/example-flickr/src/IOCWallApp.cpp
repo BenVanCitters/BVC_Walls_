@@ -4,6 +4,7 @@
 void IOCWallApp::setup()
 {
 	ofSetFrameRate(60);
+    ofSeedRandom();
 
 }
 

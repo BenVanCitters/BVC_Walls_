@@ -12,13 +12,13 @@
 //#include "threadedObject.h"
 //#include "JSONThread1.h"
 
-TileLayer::TileLayer()
+TileLayer::TileLayer():mTileSetter(200,200)
 {
-    
+    ofSeedRandom();
 //	buildDiamondMesh();
 	
 //    testURL();
-	updateImages(3,false);
+	updateImages(1,false);
     
     //    JSONThread1 fJS;
     ////    fJS.loadThreaded(/*&images,*/ false, response, 5, loader);
@@ -55,15 +55,16 @@ void TileLayer::draw()
 
 void TileLayer::update()
 {
-    
+    float tm = ofGetElapsedTimef();
+    for(int i=0; i<mTiles.size(); i++)
+    {
+        mTiles[i].update(tm);
+    }
 }
 
 void TileLayer::testURL()
 {
     ofxJSONElement  response;
-    int currentSize = 0;
-    
-    std::vector<std::string> imgUrlVector;
 
     std::string jsonURL = "http://ec2-54-212-34-135.us-west-2.compute.amazonaws.com/recent";
 
@@ -92,28 +93,37 @@ void TileLayer::testURL()
             
             cout << url << endl;
             
-            DiamondTile tile( ofVec3f(ofRandom(ofGetWindowWidth()),ofRandom(ofGetWindowWidth())),
-                             ofVec2f(ofRandom(500),ofRandom(500)),
-                             ofVec2f(ofRandom(700),ofRandom(700)));
-            mTiles.push_back(tile);
-            imgUrlVector.push_back(url);
+            int hDivisions = 50;
+            int vDivisions = hDivisions*ofGetWindowHeight()/ofGetWindowWidth();
+            float tileQuanta = ofGetWindowWidth()/hDivisions;
+            
+            ofVec2f sz;
+            ofVec2f pos;
+            bool foundRect = mTileSetter.getNewRect(&pos,&sz);
+            
+            if(!foundRect)
+            {
+                DiamondTile tile( ofVec2f(pos.x*tileQuanta,pos.y*tileQuanta),
+                                 ofVec2f(tileQuanta*sz.x, tileQuanta*sz.y),
+                                 ofVec2f(tileQuanta*sz.x, tileQuanta*sz.y));
+                mTiles.push_back(tile);
+            }
         }
     }
     
-    for(int i = 0; i < imgUrlVector.size(); i++)
+    for(int i = 0; i < mTiles.size(); i++)
     {
-        mLoader.loadFromURL(mTiles[i].mImage, imgUrlVector[i]);
+        mLoader.loadFromURL(mTiles[i].mImage, mTiles[i].mImgURL);
         mTiles[i].buildDiamondMesh();
     }
+
 }
 
 
 void TileLayer::updateImages(int queries, bool refresh)
 {
     ofxJSONElement response;
-//    int currentSize = 0;
     
-    std::vector<std::string> imgUrlVector;
     for(int j = 0; j < queries; j++)
     {
         int randomYear = 2004+(int)ofRandom(10);
@@ -149,34 +159,48 @@ void TileLayer::updateImages(int queries, bool refresh)
             std::string server = response["photos"]["photo"][i]["server"].asString();
             std::string url = "http://farm"+ofToString(farm)+".static.flickr.com/"+server+"/"+id+"_"+secret+".jpg";
             //            ofLog(OF_LOG_NOTICE, "url " + url);
-            imgUrlVector.push_back(url);
-            DiamondTile tile( ofVec3f(ofRandom(ofGetWindowWidth()),ofRandom(ofGetWindowWidth())),
-                              ofVec2f(ofRandom(500),ofRandom(500)),
-                              ofVec2f(ofRandom(700),ofRandom(700)));
-            if(!refresh)
+//            imgUrlVector.push_back(url);
+            
+            
+            ofVec2f sz;
+            ofVec2f pos;
+            bool foundRect = mTileSetter.getNewRect(&pos,&sz);
+            
+            if(foundRect)
             {
-                mTiles.push_back(tile);
+                int hDivisions = 50;
+                int vDivisions = hDivisions*ofGetWindowHeight()/ofGetWindowWidth();
+                float tileQuanta = ofGetWindowWidth()/hDivisions;
                 
+                cout << "pos: " << pos << "sz: " << sz << endl;
+                DiamondTile tile(ofVec2f(pos.x*tileQuanta,pos.y*tileQuanta),
+                                 ofVec2f(tileQuanta*sz.x, tileQuanta*sz.y),
+                                 ofVec2f(tileQuanta*sz.x, tileQuanta*sz.y));
+                mTiles.push_back(tile);
+                tile.mImgURL = url;
             }
+            
+//            float margin = 200;
+//            DiamondTile tile( ofVec3f(ofRandom(ofGetWindowWidth()+margin*2)-margin,ofRandom(ofGetWindowHeight()+margin*2)-margin),
+//                              ofVec2f(ofRandom(500),ofRandom(500)),
+//                              ofVec2f(ofRandom(700),ofRandom(700)));
+//            
+//            if(!refresh)
+//            {
+//                mTiles.push_back(tile);
+//                
+//            }
             //            ofLog(OF_LOG_NOTICE,"images[%d]: %p",(i+currentSize),&images[i+currentSize]);
             //        string fileName = "snapshot_"+ofToString(10000+i)+".png";
             //		img.saveImage(fileName);
         }
-//        currentSize+=numImages;
     }
     
-    for(int i = 0; i < imgUrlVector.size(); i++)
+    for(int i = 0; i < mTiles.size(); i++)
     {
-//        mTiles[i].loadImage(&mLoaders[i],imgUrlVector[i]);
-//        if(refresh)
-//        {
-//            int randIndex = (int)ofRandom(mTiles());
-////            mLoader.loadFromURL(mTiles[randIndex].mImage,imgUrlVector[i]);
-//        }else{
-            cout << "url: " << imgUrlVector[i] << endl;
-            mLoader.loadFromURL(mTiles[i].mImage, imgUrlVector[i]);
+            cout << "url: " << mTiles[i].mImgURL << endl;
+            mLoader.loadFromURL(mTiles[i].mImage, mTiles[i].mImgURL);
             mTiles[i].buildDiamondMesh();
-//        }
     }
 }
 
