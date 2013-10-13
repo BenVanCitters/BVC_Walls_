@@ -1,6 +1,6 @@
-#include "IOCWallApp.h"
+#include "BVCWallApp.h"
 
 int main() {
-	ofSetupOpenGL(1366+1920,1080,OF_WINDOW);
-	ofRunApp(new IOCWallApp());
+	ofSetupOpenGL(1024,768,OF_WINDOW);
+	ofRunApp(new BVCWallApp());
 }

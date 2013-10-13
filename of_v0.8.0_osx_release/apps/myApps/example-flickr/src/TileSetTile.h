@@ -1,13 +1,13 @@
 //
 //  TileSetTile.h
-//  IOCWall
+//  BVCWall
 //
 //  Created by Ben Van CItters on 10/10/13.
 //
 //
 
-#ifndef __IOCWall__TileSetTile__
-#define __IOCWall__TileSetTile__
+#ifndef __BVCWall__TileSetTile__
+#define __BVCWall__TileSetTile__
 
 #include <iostream>
 

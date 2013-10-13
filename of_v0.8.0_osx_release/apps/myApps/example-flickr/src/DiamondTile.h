@@ -1,13 +1,13 @@
 //
 //  DiamondTile.h
-//  IOCWall
+//  BVCWall
 //
 //  Created by Ben Van CItters on 10/8/13.
 //
 //
 
-#ifndef __IOCWall__DiamondTile__
-#define __IOCWall__DiamondTile__
+#ifndef __BVCWall__DiamondTile__
+#define __BVCWall__DiamondTile__
 
 #include <iostream>
 #include "ofMain.h"
@@ -17,7 +17,6 @@ class DiamondTile
 {
 public:
     ofVboMesh mVboMesh;
-    string mImgURL;
     ofImage mImage;
     ofVec3f mPos;
     
@@ -41,7 +40,6 @@ public:
     void setupDims(ofVec2f currentDim);
     void updateMouse(int xDim, int yDim);
     void draw(int i);
-    void loadImage(ofxThreadedImageLoader* loader, string url);
     void checkTexCoords();
 };
 

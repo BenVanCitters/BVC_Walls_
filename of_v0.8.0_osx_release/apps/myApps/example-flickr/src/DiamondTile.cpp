@@ -1,6 +1,6 @@
 //
 //  DiamondTile.cpp
-//  IOCWall
+//  BVCWall
 //
 //  Created by Ben Van CItters on 10/8/13.
 //
@@ -65,9 +65,9 @@ void DiamondTile::checkTexCoords()
 
 
 ofVec3f const DiamondTile::verts[4] = {ofVec3f(0.f,0.f,0.f),
-                                       ofVec3f(.5f/sqrt(3.f),.5f,0.f),
-                                       ofVec3f(-.5f/sqrt(3.f),.5f,0.f),
-                                       ofVec3f(0.f,1.f,0.f)};
+                                       ofVec3f(1.f,1.f,0.f),
+                                       ofVec3f(0.f,1.f,0.f),
+                                       ofVec3f(1.f,1.f,0.f)};
 ofVec3f DiamondTile::leg1Dir = (verts[1] - verts[0]).normalize();
 ofVec3f DiamondTile::leg2Dir = (verts[2] - verts[0]).normalize();
 
@@ -102,33 +102,18 @@ void DiamondTile::buildDiamondMesh()
     
     float scaling = 300;
     mVboMesh.addVertex(scaling*ofVec3f(0,0,0));
-    mVboMesh.addTexCoord(ofVec3f(.5,0,0));
+    mVboMesh.addTexCoord(ofVec3f(0,0,0));
     
-    mVboMesh.addVertex(scaling*ofVec3f(.5/sqrt(3),.5,0));
-    mVboMesh.addTexCoord(ofVec3f(.5+.5/sqrt(3),.5,0));
+    mVboMesh.addVertex(scaling*ofVec3f(1,0,0));
+    mVboMesh.addTexCoord(ofVec3f(1,0,0));
     
-    mVboMesh.addVertex(scaling*ofVec3f(-.5/sqrt(3),.5,0));
-    mVboMesh.addTexCoord(ofVec3f(.5-.5/sqrt(3),.5,0));
+    mVboMesh.addVertex(scaling*ofVec3f(1,1,0));
+    mVboMesh.addTexCoord(ofVec3f(1,1,0));
     
     mVboMesh.addVertex(scaling*ofVec3f(0,1,0));
-    mVboMesh.addTexCoord(ofVec3f(.5,1,0));
+    mVboMesh.addTexCoord(ofVec3f(0,1,0));
 }
 
-void DiamondTile::loadImage(ofxThreadedImageLoader* loader, string url)
-{
-//    mLoader = new ofxThreadedImageLoader();
-//    cout << mLoader << endl;
-    cout << "url: " << url << endl;
-//    mLoader->loadFromURL(mImage, url);
-    
-    loader->loadFromURL(mImage,url);
-
-//    if(!mImage.loadImage(url))
-//    {
-//        ofLog(OF_LOG_ERROR,"failed to load image!");
-//    }
-    buildDiamondMesh();
-}
 
 void DiamondTile::draw(int i)
 {

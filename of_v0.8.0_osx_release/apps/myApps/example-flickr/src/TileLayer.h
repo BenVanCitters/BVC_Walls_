@@ -1,13 +1,13 @@
 //
 //  TileLayer.h
-//  IOCWall
+//  BVCWall
 //
 //  Created by Ben Van CItters on 10/7/13.
 //
 //
 
-#ifndef __IOCWall__TileLayer__
-#define __IOCWall__TileLayer__
+#ifndef __BVCWall__TileLayer__
+#define __BVCWall__TileLayer__
 
 #include "ofMain.h"
 #include "DiamondTile.h"
@@ -22,6 +22,7 @@ class TileLayer
     ofxThreadedImageLoader mLoader;
     ofVboMesh mVboMesh;
     TileSetter mTileSetter;
+    ofVideoGrabber 		vidGrabber;
     
 public:
     
@@ -34,4 +35,4 @@ public:
     void setMouseXY(int x, int y);
 };
 
-#endif /* defined(__IOCWall__TileLayer__) */
+#endif /* defined(__BVCWall__TileLayer__) */

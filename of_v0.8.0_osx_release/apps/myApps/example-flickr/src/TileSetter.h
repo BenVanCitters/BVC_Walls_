@@ -6,8 +6,8 @@
 //
 //
 
-#ifndef __IOCWall__TileSetter__
-#define __IOCWall__TileSetter__
+#ifndef __BVCWall__TileSetter__
+#define __BVCWall__TileSetter__
 
 #include <iostream>
 #include "ofMain.h"
