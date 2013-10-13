@@ -12,6 +12,7 @@
 #include "ofMain.h"
 #include "DiamondTile.h"
 #include "ofxThreadedImageLoader.h"
+#include "TileSetter.h"
 
 #include <iostream>
 
@@ -19,10 +20,8 @@ class TileLayer
 {
     std::vector<DiamondTile> mTiles;
     ofxThreadedImageLoader mLoader;
-    std::vector<float> mXTerminations;
-    std::vector<float> mYTerminations;
     ofVboMesh mVboMesh;
-
+    TileSetter mTileSetter;
     
 public:
     
