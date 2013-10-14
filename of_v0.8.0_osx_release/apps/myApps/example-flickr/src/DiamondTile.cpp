@@ -35,7 +35,6 @@ void DiamondTile::update(float tm)
 
 void DiamondTile::checkTexCoords()
 {
-    
     if(mImage.width+mImage.height > 0)
     {
         float startArea = (leg1Dir*mStartDim.x).crossed(leg2Dir*mStartDim.y).length();
@@ -82,6 +81,15 @@ void DiamondTile::setupDims(ofVec2f currentDim)
         mVboMesh.setVertex(1, leg1Dir*currentDim.x);
         mVboMesh.setVertex(2, leg2Dir*currentDim.y);
         mVboMesh.setVertex(3, (leg1Dir*currentDim.x+leg2Dir*currentDim.y));
+    }
+    
+    if(mVboMesh.getTexCoords().size() > 3)
+    {
+        ofVec2f wxh(ofGetWindowWidth(),ofGetWindowHeight());
+        mVboMesh.setTexCoord(0, ofVec2f(mPos.x/wxh.x,mPos.y/wxh.y));
+        mVboMesh.setTexCoord(1, ofVec2f((mPos.x+currentDim.x)/wxh.x,mPos.y/wxh.y));
+        mVboMesh.setTexCoord(2, ofVec2f(mPos.x/wxh.x,(mPos.y+currentDim.y)/wxh.y));
+        mVboMesh.setTexCoord(3, ofVec2f((mPos.x+currentDim.x)/wxh.x,(mPos.y+currentDim.y)/wxh.y));
     }
 }
 
@@ -137,7 +145,7 @@ void DiamondTile::draw(int i)
         ofTranslate(mPos); // position the current mesh
 //        ofTranslate(i*55%winWidth, 200+i*5%winHeight); // position the current mesh
 //        ofRotateX((ofGetElapsedTimef() +i)* 30); // slowly rotate the model
-//        ofRotateY((ofGetElapsedTimef() +i*1.1)* 10);
+//        ofRotateZ((ofGetElapsedTimef() +i*1.1)* 10);
 
 //        ofTranslate(mPos); // position the current mesh
 //        ofRotateX((ofGetElapsedTimef())* 30); // slowly rotate the model

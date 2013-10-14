@@ -29,7 +29,6 @@ void BVCWallApp::keyPressed(int key)
 
 void BVCWallApp::mousePressed(int x, int y, int button)
 {
-	mTileLayer.updateImages(2,true);
     cout << "mousePressed: " << x << ", " << y << " button: " << button << endl;
 }
 

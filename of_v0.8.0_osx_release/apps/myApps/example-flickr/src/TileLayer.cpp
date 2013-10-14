@@ -16,7 +16,7 @@ TileLayer::TileLayer():mTileSetter(20,15)
 //	buildDiamondMesh();
 	
 //    testURL();
-	updateImages(1,false);
+	generateTiles(600);
     
     vidGrabber.setDeviceID(0);
     vidGrabber.setVerbose(true);
@@ -62,32 +62,33 @@ void TileLayer::update()
 }
 
 
-void TileLayer::updateImages(int queries, bool refresh)
+void TileLayer::generateTiles(int numImages)
 {
-    for(int j = 0; j < queries; j++)
+    int hDivisions = mTileSetter.mWidth;
+    int vDivisions = mTileSetter.mHeight;
+    float tileWQuanta = ofGetWindowWidth()/hDivisions;
+    float tileHQuanta = ofGetWindowHeight()/vDivisions;
+
+    ofLog(OF_LOG_NOTICE, "numImages %d",numImages);
+    for(int i=0; i< numImages; i++)
     {
-        int numImages =600;
+        ofVec2f sz;
+        ofVec2f pos;
+        bool foundRect = mTileSetter.getNewRect(&pos,&sz);
         
-        ofLog(OF_LOG_NOTICE, "numImages %d",numImages);
-        for(int i=0; i< numImages; i++)
+        if(foundRect)
         {
-                        ofVec2f sz;
-            ofVec2f pos;
-            bool foundRect = mTileSetter.getNewRect(&pos,&sz);
-            
-            if(foundRect)
-            {
-                int hDivisions = mTileSetter.mWidth;
-                int vDivisions = mTileSetter.mHeight;
-                float tileWQuanta = ofGetWindowWidth()/hDivisions;
-                float tileHQuanta = ofGetWindowHeight()/vDivisions;
-                
-                cout << "pos: " << pos << "sz: " << sz << endl;
-                DiamondTile tile(ofVec2f(pos.x*tileWQuanta,pos.y*tileHQuanta),
-                                 ofVec2f(tileWQuanta*sz.x, tileHQuanta*sz.y),
-                                 ofVec2f(tileWQuanta*sz.x, tileHQuanta*sz.y));
-                mTiles.push_back(tile);
-            }
+            cout << "pos: " << pos << "sz: " << sz << endl;
+            DiamondTile tile(ofVec2f(pos.x*tileWQuanta,pos.y*tileHQuanta),
+                             ofVec2f(tileWQuanta*sz.x, tileHQuanta*sz.y),
+                             ofVec2f(tileWQuanta*sz.x, tileHQuanta*sz.y));
+            ofVec2f widthHt(ofGetWindowWidth(),ofGetWindowHeight());
+//            ofVec2f texCoords[4] = {ofVec2f(pos.x/widthHt.x,pos.y/widthHt.y),
+//                                    ofVec2f(pos.x/widthHt.x,pos.y/widthHt.y),
+//                                    ofVec2f(pos.x/widthHt.x,pos.y/widthHt.y),
+//                                    ofVec2f(pos.x/widthHt.x,pos.y/widthHt.y)};
+//            tile.setTexCoords(texCoords);
+            mTiles.push_back(tile);
         }
     }
     

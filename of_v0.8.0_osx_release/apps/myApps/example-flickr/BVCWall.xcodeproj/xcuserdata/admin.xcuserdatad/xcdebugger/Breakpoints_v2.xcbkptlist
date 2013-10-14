@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/DiamondTile.cpp"
-            timestampString = "403415090.702057"
+            timestampString = "403432904.815421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "DiamondTile::buildDiamondMesh()"
             landmarkType = "5">
          </BreakpointContent>
@@ -100,11 +100,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/TileSetter.cpp"
-            timestampString = "403415232.394223"
+            timestampString = "403421074.436073"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)"
             landmarkType = "5">
          </BreakpointContent>
@@ -116,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/TileSetter.cpp"
-            timestampString = "403415232.394223"
+            timestampString = "403421026.869086"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)"
             landmarkType = "5">
          </BreakpointContent>
@@ -132,11 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/TileSetter.cpp"
-            timestampString = "403415232.394223"
+            timestampString = "403421026.869086"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)"
             landmarkType = "5">
             <Locations>
@@ -178,11 +178,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/TileSetter.cpp"
-            timestampString = "403415232.394223"
+            timestampString = "403419401.693333"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)"
             landmarkType = "5">
          </BreakpointContent>
@@ -193,29 +193,45 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/TileLayer.cpp"
-            timestampString = "403414460.793739"
+            filePath = "src/DiamondTile.cpp"
+            timestampString = "403432904.815421"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "TileLayer::updateImages(int queries, bool refresh)"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "DiamondTile::draw(int i)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/DiamondTile.cpp"
-            timestampString = "403415090.702057"
+            filePath = "src/TileSetter.cpp"
+            timestampString = "403419459.227441"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "DiamondTile::draw(int i)"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "TileSetter::TileSetter(int width, int height)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/TileSetter.cpp"
+            timestampString = "403421022.813787"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

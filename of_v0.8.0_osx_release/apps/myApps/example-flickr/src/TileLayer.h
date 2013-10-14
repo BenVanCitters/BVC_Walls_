@@ -30,7 +30,7 @@ public:
     void testURL();
     void update();
     void draw();
-    void updateImages(int queries, bool refresh);
+    void generateTiles(int numImages);
     void loadImages(std::vector<std::string> imgUrlVector);
     void setMouseXY(int x, int y);
 };

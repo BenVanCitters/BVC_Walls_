@@ -17,11 +17,12 @@ TileSetter::TileSetter(int width, int height)
 {
     mWidth = width;
     mHeight = height;
-    
-    tiles.resize(mWidth);
+    ofSeedRandom();
+    mMaxTileSize = ofVec2f(1+ofRandom(mWidth/3.f),1+ofRandom(mHeight/3.f));
+    tiles.resize(mHeight);
     for(int i = 0; i < tiles.size(); i++)
     {
-        tiles[i].resize(mHeight);
+        tiles[i].resize(mWidth);
         for(int j = 0; j < tiles[i].size(); j++)
         {
             tiles[i][j].tileRight = NULL;
@@ -63,15 +64,14 @@ bool TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)
     if(!foundAnEmpty)
         return false;
 
+    ofVec2f maxExtent(MIN(mMaxTileSize.x+newPos.x,tiles[0].size()),
+                        MIN(mMaxTileSize.y+newPos.y, tiles.size()));
 
-    ofVec2f maxSz(MIN(15+newPos.x,tiles[0].size()),
-                  MIN(10+newPos.y, tiles.size()));
-    
-    ofVec2f maxExtent = maxSz;
-    
     std::vector<ofVec2f> boxSzs;
     for(int i = newPos.y; i < maxExtent.y; i++)
     {
+        if(i == tiles.size()-1)
+            i = tiles.size()-1;
         for(int j = newPos.x; j < maxExtent.x; j++)
         {
             if(tiles[i][j].isOccupied)
@@ -80,7 +80,8 @@ bool TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)
             }
             else
             {
-                boxSzs.push_back(ofVec2f(j-newPos.x+1,i-newPos.y+1));
+                ofVec2f newSz(j-newPos.x+1,i-newPos.y+1);
+                boxSzs.push_back(newSz);
             }
         }
     }
@@ -88,15 +89,18 @@ bool TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)
     if(boxSzs.size() < 1)
         return false;
 
+    //pick a random size
     int rndIndex =(int)ofRandom(boxSzs.size());
     ofVec2f randomSz = boxSzs[rndIndex];
     
     //'occupy' all the used up tiles
     for(int i = newPos.y; i < randomSz.y+newPos.y; i++)
+    {
         for(int j = newPos.x; j < randomSz.x+newPos.x; j++)
         {
             tiles[i][j].isOccupied = true;
         }
+    }
     
     sz->x =randomSz.x;
     sz->y =randomSz.y;

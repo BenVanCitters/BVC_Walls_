@@ -20,6 +20,7 @@ private:
 public:
     int mWidth;
     int mHeight;
+    ofVec2f mMaxTileSize;
     
     TileSetter();
     TileSetter(int width, int height);
