@@ -15,10 +15,13 @@ TileSetter::TileSetter()
 
 TileSetter::TileSetter(int width, int height)
 {
-    tiles.resize(width);
+    mWidth = width;
+    mHeight = height;
+    
+    tiles.resize(mWidth);
     for(int i = 0; i < tiles.size(); i++)
     {
-        tiles[i].resize(height);
+        tiles[i].resize(mHeight);
         for(int j = 0; j < tiles[i].size(); j++)
         {
             tiles[i][j].tileRight = NULL;
@@ -61,15 +64,26 @@ bool TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)
         return false;
 
 
-    ofVec2f maxSz(MIN(25+newPos.x,tiles[0].size()),
-                  MIN(25+newPos.y, tiles.size()));
+    ofVec2f maxSz(MIN(15+newPos.x,tiles[0].size()),
+                  MIN(10+newPos.y, tiles.size()));
+    
+    ofVec2f maxExtent = maxSz;
     
     std::vector<ofVec2f> boxSzs;
-    for(int i = newPos.y; i < maxSz.y; i++)
-        for(int j = newPos.x; j < maxSz.x && (!tiles[i][j].isOccupied); j++)
+    for(int i = newPos.y; i < maxExtent.y; i++)
+    {
+        for(int j = newPos.x; j < maxExtent.x; j++)
         {
-            boxSzs.push_back(ofVec2f(j-newPos.x+1,i-newPos.y+1));
+            if(tiles[i][j].isOccupied)
+            {
+                maxExtent.x = j-1;
+            }
+            else
+            {
+                boxSzs.push_back(ofVec2f(j-newPos.x+1,i-newPos.y+1));
+            }
         }
+    }
     //found no usable sizes
     if(boxSzs.size() < 1)
         return false;

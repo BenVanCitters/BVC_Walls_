@@ -22,8 +22,8 @@ class TileLayer
     ofxThreadedImageLoader mLoader;
     ofVboMesh mVboMesh;
     TileSetter mTileSetter;
-    ofVideoGrabber 		vidGrabber;
-    
+    ofVideoGrabber vidGrabber;
+    ofTexture videoTexture;
 public:
     
     TileLayer();

@@ -15,6 +15,11 @@
 
 class DiamondTile
 {
+private:
+    static const ofVec3f verts[4];
+    static ofVec3f leg1Dir;
+    static ofVec3f leg2Dir;
+
 public:
     ofVboMesh mVboMesh;
     ofImage mImage;
@@ -29,10 +34,6 @@ public:
     float mAnimDuration;
     float mAnimOffset;
     
-    static const ofVec3f verts[4];
-    static ofVec3f leg1Dir;
-    static ofVec3f leg2Dir;
-
     DiamondTile();
     DiamondTile(ofVec3f pos, ofVec2f startDim, ofVec2f endDim);
     void update(float tm);
@@ -41,6 +42,7 @@ public:
     void updateMouse(int xDim, int yDim);
     void draw(int i);
     void checkTexCoords();
+    void setTexCoords(ofVec2f* coords);
 };
 
 #endif /* defined(__IOCWall__DiamondTile__) */

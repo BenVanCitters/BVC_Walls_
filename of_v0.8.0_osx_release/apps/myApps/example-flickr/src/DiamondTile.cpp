@@ -65,7 +65,7 @@ void DiamondTile::checkTexCoords()
 
 
 ofVec3f const DiamondTile::verts[4] = {ofVec3f(0.f,0.f,0.f),
-                                       ofVec3f(1.f,1.f,0.f),
+                                       ofVec3f(1.f,0.f,0.f),
                                        ofVec3f(0.f,1.f,0.f),
                                        ofVec3f(1.f,1.f,0.f)};
 ofVec3f DiamondTile::leg1Dir = (verts[1] - verts[0]).normalize();
@@ -91,6 +91,14 @@ void DiamondTile::updateMouse(int xDim, int yDim)
 //    setupDims();
 }
 
+void DiamondTile::setTexCoords(ofVec2f* coords)
+{
+    for(int i = 0; i < 4; i++)
+    {
+        mVboMesh.setTexCoord(i, coords[i]);
+    }
+}
+
 void DiamondTile::buildDiamondMesh()
 {
 	// OF_PRIMITIVE_TRIANGLES means every three vertices create a triangle
@@ -108,10 +116,10 @@ void DiamondTile::buildDiamondMesh()
     mVboMesh.addTexCoord(ofVec3f(1,0,0));
     
     mVboMesh.addVertex(scaling*ofVec3f(1,1,0));
-    mVboMesh.addTexCoord(ofVec3f(1,1,0));
+    mVboMesh.addTexCoord(ofVec3f(0,1,0));
     
     mVboMesh.addVertex(scaling*ofVec3f(0,1,0));
-    mVboMesh.addTexCoord(ofVec3f(0,1,0));
+    mVboMesh.addTexCoord(ofVec3f(1,1,0));
 }
 
 
@@ -124,7 +132,7 @@ void DiamondTile::draw(int i)
     int winWidth = ofGetWindowWidth();
     int winHeight = ofGetWindowWidth();
 //    cout << (mImage.width + mImage.height) << ", ";
-    if(mImage.width + mImage.height > 0)
+    //if(mImage.width + mImage.height > 0)
     {
         ofTranslate(mPos); // position the current mesh
 //        ofTranslate(i*55%winWidth, 200+i*5%winHeight); // position the current mesh
@@ -134,9 +142,9 @@ void DiamondTile::draw(int i)
 //        ofTranslate(mPos); // position the current mesh
 //        ofRotateX((ofGetElapsedTimef())* 30); // slowly rotate the model
 //        ofRotateY((ofGetElapsedTimef())* 10);
-        mImage.bind();
+        //mImage.bind();
         mVboMesh.draw();
-        mImage.unbind();
+        //mImage.unbind();
     }
     ofPopMatrix();
 }

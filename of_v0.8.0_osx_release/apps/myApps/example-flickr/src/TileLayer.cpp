@@ -10,7 +10,7 @@
 //
 
 
-TileLayer::TileLayer():mTileSetter(200,200)
+TileLayer::TileLayer():mTileSetter(20,15)
 {
     ofSeedRandom();
 //	buildDiamondMesh();
@@ -29,20 +29,21 @@ void TileLayer::draw()
 {
     ofEnableDepthTest();
     
-
-    
-	ofBackground(0);
-    vidGrabber.draw(10,10);
+	ofBackground(255,255,255);
+    //vidGrabber.draw(10,10);
     ofEnableNormalizedTexCoords();
     
     int winWidth = ofGetWindowWidth();
     int winHeight = ofGetWindowWidth();
 	
+    vidGrabber.getTextureReference().bind();
+//    videoTexture.bind();
     for(int i=0; i<mTiles.size(); i++)
     {
         mTiles[i].draw(i);
     }
-    
+//    videoTexture.unbind();
+    vidGrabber.getTextureReference().unbind();
     ofDisableDepthTest();
     ofDisableNormalizedTexCoords();
     // draw the framerate in the top left corner
@@ -52,6 +53,7 @@ void TileLayer::draw()
 void TileLayer::update()
 {
     vidGrabber.update();
+    
     float tm = ofGetElapsedTimef();
     for(int i=0; i<mTiles.size(); i++)
     {
@@ -62,13 +64,9 @@ void TileLayer::update()
 
 void TileLayer::updateImages(int queries, bool refresh)
 {
-    
-    
     for(int j = 0; j < queries; j++)
     {
-        int numImages =0;
-        
-        
+        int numImages =600;
         
         ofLog(OF_LOG_NOTICE, "numImages %d",numImages);
         for(int i=0; i< numImages; i++)
@@ -79,23 +77,23 @@ void TileLayer::updateImages(int queries, bool refresh)
             
             if(foundRect)
             {
-                int hDivisions = 50;
-                int vDivisions = hDivisions*ofGetWindowHeight()/ofGetWindowWidth();
-                float tileQuanta = ofGetWindowWidth()/hDivisions;
+                int hDivisions = mTileSetter.mWidth;
+                int vDivisions = mTileSetter.mHeight;
+                float tileWQuanta = ofGetWindowWidth()/hDivisions;
+                float tileHQuanta = ofGetWindowHeight()/vDivisions;
                 
                 cout << "pos: " << pos << "sz: " << sz << endl;
-                DiamondTile tile(ofVec2f(pos.x*tileQuanta,pos.y*tileQuanta),
-                                 ofVec2f(tileQuanta*sz.x, tileQuanta*sz.y),
-                                 ofVec2f(tileQuanta*sz.x, tileQuanta*sz.y));
+                DiamondTile tile(ofVec2f(pos.x*tileWQuanta,pos.y*tileHQuanta),
+                                 ofVec2f(tileWQuanta*sz.x, tileHQuanta*sz.y),
+                                 ofVec2f(tileWQuanta*sz.x, tileHQuanta*sz.y));
                 mTiles.push_back(tile);
             }
-            
         }
     }
     
     for(int i = 0; i < mTiles.size(); i++)
     {
-            mTiles[i].buildDiamondMesh();
+        mTiles[i].buildDiamondMesh();
     }
 }
 

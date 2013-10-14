@@ -18,6 +18,9 @@ class TileSetter
 private:
     std::vector<std::vector<TileSetTile> > tiles;
 public:
+    int mWidth;
+    int mHeight;
+    
     TileSetter();
     TileSetter(int width, int height);
     bool getNewRect(ofVec2f* pos, ofVec2f* sz);
