@@ -22,7 +22,6 @@ private:
 
 public:
     ofVboMesh mVboMesh;
-    ofImage mImage;
     ofVec3f mPos;
     
     ofVec2f mStartDim;
@@ -35,13 +34,12 @@ public:
     float mAnimOffset;
     
     DiamondTile();
-    DiamondTile(ofVec3f pos, ofVec2f startDim, ofVec2f endDim);
+    DiamondTile(ofVec3f pos, ofVec2f startDim);
     void update(float tm);
-    void buildDiamondMesh();
-    void setupDims(ofVec2f currentDim);
+    void setupMesh(ofVec2f currentDim);
     void updateMouse(int xDim, int yDim);
     void draw(int i);
-    void checkTexCoords();
+//    void checkTexCoords();
     void setTexCoords(ofVec2f* coords);
 };
 

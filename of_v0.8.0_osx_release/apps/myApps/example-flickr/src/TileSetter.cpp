@@ -104,7 +104,7 @@ bool TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)
     
     sz->x =randomSz.x;
     sz->y =randomSz.y;
-    pos->x = newPos.x;
-    pos->y = newPos.y;
+    pos->x = newPos.x + sz->x/2;
+    pos->y = newPos.y + sz->y/2;
     return true;
 }

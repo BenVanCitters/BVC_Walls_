@@ -10,56 +10,25 @@
 
 DiamondTile::DiamondTile()
 {
-    DiamondTile::DiamondTile(ofVec3f(200,200),ofVec3f(200,200),ofVec3f(200,200));
+    DiamondTile::DiamondTile(ofVec3f(200,200),ofVec3f(200,200));
 }
 
-DiamondTile::DiamondTile(ofVec3f pos, ofVec2f startDim, ofVec2f endDim)
+DiamondTile::DiamondTile(ofVec3f pos, ofVec2f startDim)
 {
     mPos = pos;
     mStartDim = startDim;
-    mEndDim = endDim;
+//    mEndDim = endDim;
     mAnimDuration = 4.f;
     mAnimOffset = ofRandom(mAnimDuration);
-    
-//    setupDims();
-    update(0);
+    setupMesh(mStartDim);
 }
 
 void DiamondTile::update(float tm)
 {
-    float myTm = tm+mAnimOffset;
-    float tween = (cos(TWO_PI* myTm/mAnimDuration) + 1)/2;
-    ofVec2f dim = tween*mStartDim + (1-tween)*mEndDim;
-    setupDims(dim);
-}
-
-void DiamondTile::checkTexCoords()
-{
-    if(mImage.width+mImage.height > 0)
-    {
-        float startArea = (leg1Dir*mStartDim.x).crossed(leg2Dir*mStartDim.y).length();
-        float startW = abs((leg1Dir*mStartDim.x - leg2Dir*mStartDim.y).x);
-        float startH = (leg1Dir*mStartDim.x+leg2Dir*mStartDim.y).length();
-        float startVWToH = startW/startH;
-
-        float endArea = (leg1Dir*mEndDim.x).crossed(leg2Dir*mEndDim.y).length();
-        float endW = abs((leg1Dir*mEndDim.x - leg2Dir*mEndDim.y).x);
-        float endH = (leg1Dir*mEndDim.x+leg2Dir*mEndDim.y).length();
-        float endVWToH = (mEndDim.x*leg1Dir).length()/(mEndDim.y*leg2Dir).length();
-        
-        float imgWToH = mImage.width*1.f/mImage.height;
-        
-        if (startVWToH < 1 && endVWToH < 1)
-        {
-//            max
-        }
-        
-        
-        mVboMesh.setTexCoord(0, ofVec3f(0,0));
-        mVboMesh.setTexCoord(1, leg1Dir*mStartTexPos[0].x);
-        mVboMesh.setTexCoord(2, leg2Dir*mStartTexPos[0].y);
-        mVboMesh.setTexCoord(3, (leg1Dir*mStartTexPos[0].x+leg2Dir*mStartTexPos[0].y));
-    }
+//    float myTm = tm+mAnimOffset;
+//    float tween = (cos(TWO_PI* myTm/mAnimDuration) + 1)/2;
+//    ofVec2f dim = tween*mStartDim + (1-tween)*mEndDim;
+//    setupMesh(mStartDim);
 }
 
 
@@ -71,25 +40,22 @@ ofVec3f DiamondTile::leg1Dir = (verts[1] - verts[0]).normalize();
 ofVec3f DiamondTile::leg2Dir = (verts[2] - verts[0]).normalize();
 
 
-void DiamondTile::setupDims(ofVec2f currentDim)
+void DiamondTile::setupMesh(ofVec2f currentDim)
 {
+    mVboMesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+    ofVec2f wxh(ofGetWindowWidth(),ofGetWindowHeight());
     
-//    std::vector<ofVec3f> meshVerts = mVboMesh.getVertices();
-    if(mVboMesh.getVertices().size() > 3)
+    ofVec2f pos[4] = {(-leg1Dir*currentDim.x - leg2Dir*currentDim.y)/2,
+                      (leg1Dir*currentDim.x - leg2Dir*currentDim.y)/2,
+                      (-leg1Dir*currentDim.x+leg2Dir*currentDim.y)/2,
+                      (leg2Dir*currentDim.y + leg1Dir*currentDim.x)/2};
+    //set verticies & texture coords
+    for(int i = 0; i < 4; i++)
     {
-        mVboMesh.setVertex(0, ofVec3f(0,0));
-        mVboMesh.setVertex(1, leg1Dir*currentDim.x);
-        mVboMesh.setVertex(2, leg2Dir*currentDim.y);
-        mVboMesh.setVertex(3, (leg1Dir*currentDim.x+leg2Dir*currentDim.y));
-    }
-    
-    if(mVboMesh.getTexCoords().size() > 3)
-    {
-        ofVec2f wxh(ofGetWindowWidth(),ofGetWindowHeight());
-        mVboMesh.setTexCoord(0, ofVec2f(mPos.x/wxh.x,mPos.y/wxh.y));
-        mVboMesh.setTexCoord(1, ofVec2f((mPos.x+currentDim.x)/wxh.x,mPos.y/wxh.y));
-        mVboMesh.setTexCoord(2, ofVec2f(mPos.x/wxh.x,(mPos.y+currentDim.y)/wxh.y));
-        mVboMesh.setTexCoord(3, ofVec2f((mPos.x+currentDim.x)/wxh.x,(mPos.y+currentDim.y)/wxh.y));
+        mVboMesh.addVertex(pos[i]);
+        pos[i] += mPos;
+        mVboMesh.addTexCoord(ofVec2f(pos[i].x/wxh.x, pos[i].y/wxh.y));
+        mVboMesh.addNormal(ofVec3f(0,0,1));
     }
 }
 
@@ -105,29 +71,6 @@ void DiamondTile::setTexCoords(ofVec2f* coords)
     {
         mVboMesh.setTexCoord(i, coords[i]);
     }
-}
-
-void DiamondTile::buildDiamondMesh()
-{
-	// OF_PRIMITIVE_TRIANGLES means every three vertices create a triangle
-	mVboMesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
-	
-    //	int width = texture.getWidth();
-    //	int height = texture.getHeight();
-    //	ofVec2f imageSize(width,height);
-    
-    float scaling = 300;
-    mVboMesh.addVertex(scaling*ofVec3f(0,0,0));
-    mVboMesh.addTexCoord(ofVec3f(0,0,0));
-    
-    mVboMesh.addVertex(scaling*ofVec3f(1,0,0));
-    mVboMesh.addTexCoord(ofVec3f(1,0,0));
-    
-    mVboMesh.addVertex(scaling*ofVec3f(1,1,0));
-    mVboMesh.addTexCoord(ofVec3f(0,1,0));
-    
-    mVboMesh.addVertex(scaling*ofVec3f(0,1,0));
-    mVboMesh.addTexCoord(ofVec3f(1,1,0));
 }
 
 
@@ -150,9 +93,7 @@ void DiamondTile::draw(int i)
 //        ofTranslate(mPos); // position the current mesh
 //        ofRotateX((ofGetElapsedTimef())* 30); // slowly rotate the model
 //        ofRotateY((ofGetElapsedTimef())* 10);
-        //mImage.bind();
         mVboMesh.draw();
-        //mImage.unbind();
     }
     ofPopMatrix();
 }

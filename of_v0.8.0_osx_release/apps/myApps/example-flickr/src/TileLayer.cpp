@@ -10,7 +10,7 @@
 //
 
 
-TileLayer::TileLayer():mTileSetter(20,15)
+TileLayer::TileLayer():mTileSetter(30,35)
 {
     ofSeedRandom();
 //	buildDiamondMesh();
@@ -21,7 +21,7 @@ TileLayer::TileLayer():mTileSetter(20,15)
     vidGrabber.setDeviceID(0);
     vidGrabber.setVerbose(true);
     vidGrabber.setDesiredFrameRate(60);
-	vidGrabber.initGrabber(640,480);
+	vidGrabber.initGrabber(1280,720);
 }
 
 
@@ -78,24 +78,13 @@ void TileLayer::generateTiles(int numImages)
         
         if(foundRect)
         {
-            cout << "pos: " << pos << "sz: " << sz << endl;
+//            cout << "pos: " << pos << "sz: " << sz << endl;
             DiamondTile tile(ofVec2f(pos.x*tileWQuanta,pos.y*tileHQuanta),
-                             ofVec2f(tileWQuanta*sz.x, tileHQuanta*sz.y),
                              ofVec2f(tileWQuanta*sz.x, tileHQuanta*sz.y));
-            ofVec2f widthHt(ofGetWindowWidth(),ofGetWindowHeight());
-//            ofVec2f texCoords[4] = {ofVec2f(pos.x/widthHt.x,pos.y/widthHt.y),
-//                                    ofVec2f(pos.x/widthHt.x,pos.y/widthHt.y),
-//                                    ofVec2f(pos.x/widthHt.x,pos.y/widthHt.y),
-//                                    ofVec2f(pos.x/widthHt.x,pos.y/widthHt.y)};
-//            tile.setTexCoords(texCoords);
             mTiles.push_back(tile);
         }
     }
-    
-    for(int i = 0; i < mTiles.size(); i++)
-    {
-        mTiles[i].buildDiamondMesh();
-    }
+
 }
 
 void TileLayer::loadImages(std::vector<std::string> imgUrlVector)
