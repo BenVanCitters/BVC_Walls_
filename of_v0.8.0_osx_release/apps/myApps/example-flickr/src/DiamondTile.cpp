@@ -17,20 +17,68 @@ DiamondTile::DiamondTile(ofVec3f pos, ofVec2f startDim)
 {
     mPos = pos;
     mStartDim = startDim;
-//    mEndDim = endDim;
     mAnimDuration = 4.f;
     mAnimOffset = ofRandom(mAnimDuration);
     setupMesh(mStartDim);
+    mCurrentState = tileStateWaiting;
+    mSpinDuration = 3;
+    mReSpinWait = 1.5;
+    mNeighborActivationDelay = .1;
+    mTriggeredNeighbors = false;
 }
 
 void DiamondTile::update(float tm)
 {
-//    float myTm = tm+mAnimOffset;
-//    float tween = (cos(TWO_PI* myTm/mAnimDuration) + 1)/2;
-//    ofVec2f dim = tween*mStartDim + (1-tween)*mEndDim;
-//    setupMesh(mStartDim);
+    if(mCurrentState == tileStateSpinning)
+    {
+
+        mCurRotation[mRotationIndex]= sin(mAnimOffset+10-1/(.001+mCurSpinStartTime-tm)) * 35;
+        if(!mTriggeredNeighbors && tm - mCurSpinStartTime >mNeighborActivationDelay)
+        {
+            mTriggeredNeighbors = true;
+            std::set<DiamondTile*>::iterator it;
+            for (it = mNeighborTiles.begin(); it != mNeighborTiles.end(); ++it)
+            {
+                DiamondTile* n = *it;
+                if(ofRandomf() > .2)
+                //int rotationIndex, float duration, float wait, float activationDelay
+                n->startSpin(mRotationIndex,mSpinDuration,mReSpinWait,mNeighborActivationDelay);
+            }
+        }
+        
+        if(tm > mCurSpinFinishTime)
+        {
+            mCurrentState = tileStateWaiting;
+            mSpinWaitStartTime =tm;
+            mSpinWaitFinishTime =tm + mReSpinWait;
+            mTriggeredNeighbors = false;
+        }
+        
+    }
+    else
+    {
+        mCurRotation *= .95;
+    }
 }
 
+
+void DiamondTile::startSpin(int rotationIndex, float duration, float wait, float activationDelay)
+{
+    float tm = ofGetElapsedTimef();
+    
+    if(tm > mSpinWaitFinishTime && mCurrentState != tileStateSpinning)
+    {
+        mCurrentState = tileStateSpinning;
+        mCurSpinStartTime = tm;
+        mCurSpinFinishTime = mCurSpinStartTime + mSpinDuration;
+        mRotationIndex = rotationIndex;
+        
+        mSpinDuration = duration;
+        mReSpinWait = wait;
+        mNeighborActivationDelay = activationDelay;
+
+    }
+}
 
 ofVec3f const DiamondTile::verts[4] = {ofVec3f(0.f,0.f,0.f),
                                        ofVec3f(1.f,0.f,0.f),
@@ -89,8 +137,11 @@ void DiamondTile::draw(int i)
         ofTranslate(mPos); // position the current mesh
 //        ofTranslate(i*55%winWidth, 200+i*5%winHeight); // position the current mesh
 //        ofRotateX((ofGetElapsedTimef() +i)* 30); // slowly rotate the model
-        ofRotateZ((ofGetElapsedTimef() +i*1.1)* 10);
+//        if(mCurrentState == tileStateSpinning)
 
+            ofRotateX(mCurRotation.x);
+            ofRotateY(mCurRotation.y);
+            ofRotateZ(mCurRotation.z);
 //        ofTranslate(mPos); // position the current mesh
 //        ofRotateX((ofGetElapsedTimef())* 30); // slowly rotate the model
 //        ofRotateY((ofGetElapsedTimef())* 10);

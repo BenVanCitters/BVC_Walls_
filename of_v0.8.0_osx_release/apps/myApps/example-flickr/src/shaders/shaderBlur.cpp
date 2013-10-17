@@ -41,7 +41,10 @@ void shaderBlur::endRender(){
 void shaderBlur::setBlurParams(int numPasses, float blurDist, float dvAmt){
 	noPasses		= ofClamp(numPasses, 1, 100000);
 	blurDistance	= blurDist;
+//    cout << "blurDist: " << blurDist << endl;
+
     divAmount = dvAmt;
+//    cout << "divAmount: " << divAmount << endl;
 }
 
 //--------------------------------------------------------------

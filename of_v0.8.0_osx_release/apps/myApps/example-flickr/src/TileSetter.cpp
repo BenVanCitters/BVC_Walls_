@@ -29,7 +29,7 @@ TileSetter::TileSetter(int width, int height)
             tiles[i][j].tileAbove = NULL;
             tiles[i][j].tileLeft = NULL;
             tiles[i][j].tileBelow= NULL;
-
+            tiles[i][j].mOwnerTile = NULL;
             if(i > 0)
             {
                 tiles[i][j].tileAbove = &tiles[i-1][j];
@@ -45,7 +45,7 @@ TileSetter::TileSetter(int width, int height)
 }
 
 //
-bool TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)
+bool TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz, std::vector<TileSetTile*>* tilesPieces)
 {
     //find an empty starting space;
     ofVec2f newPos;
@@ -92,6 +92,7 @@ bool TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)
     //pick a random size
     int rndIndex =(int)ofRandom(boxSzs.size());
     ofVec2f randomSz = boxSzs[rndIndex];
+
     
     //'occupy' all the used up tiles
     for(int i = newPos.y; i < randomSz.y+newPos.y; i++)
@@ -99,12 +100,67 @@ bool TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)
         for(int j = newPos.x; j < randomSz.x+newPos.x; j++)
         {
             tiles[i][j].isOccupied = true;
+            tilesPieces->push_back(&tiles[i][j]);
         }
     }
     
+
     sz->x =randomSz.x;
     sz->y =randomSz.y;
     pos->x = newPos.x + sz->x/2;
     pos->y = newPos.y + sz->y/2;
     return true;
+}
+
+void TileSetter::findNeighbors()
+{
+    for(int i = 0; i < tiles.size(); i++)
+        for(int j = 0; j < tiles[i].size(); j++)
+        {
+            TileSetTile currentTile = tiles[i][j];
+            DiamondTile* owner = currentTile.mOwnerTile;
+            DiamondTile* neighbor;
+            bool foundResult = false;
+            if(i > 0)
+            {
+//                std::set<DiamondTile*> set;
+//                set.
+                neighbor = tiles[i-1][j].mOwnerTile;
+//                foundResult = std::find(owner->mNeighborTiles.begin(),
+//                                        owner->mNeighborTiles.end(),
+//                                        neighbor) != owner->mNeighborTiles.end();
+                if(owner != neighbor)
+                    owner->mNeighborTiles.insert(neighbor);
+            }
+            if(i < tiles.size()-2)
+            {
+                neighbor = tiles[i+1][j].mOwnerTile;
+//                foundResult = std::find(owner->mNeighborTiles.begin(),
+//                                       owner->mNeighborTiles.end(),
+//                                       neighbor) != owner->mNeighborTiles.end();
+                if(owner != neighbor)
+                    owner->mNeighborTiles.insert(neighbor);
+            }
+            
+            if(j < tiles[i].size()-2)
+            {
+                neighbor = tiles[i][j+1].mOwnerTile;
+//                foundResult = std::find(owner->mNeighborTiles.begin(),
+//                                        owner->mNeighborTiles.end(),
+//                                        neighbor) != owner->mNeighborTiles.end();
+                if(owner != neighbor)
+                    owner->mNeighborTiles.insert(neighbor);
+            }
+            
+            
+            if(j > 0)
+            {
+                neighbor = tiles[i][j-1].mOwnerTile;
+//                foundResult = std::find(owner->mNeighborTiles.begin(),
+//                                        owner->mNeighborTiles.end(),
+//                                        neighbor) != owner->mNeighborTiles.end();
+                if(owner != neighbor)
+                    owner->mNeighborTiles.insert(neighbor);
+            }
+        }
 }

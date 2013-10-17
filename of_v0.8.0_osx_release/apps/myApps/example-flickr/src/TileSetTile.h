@@ -10,6 +10,7 @@
 #define __BVCWall__TileSetTile__
 
 #include <iostream>
+#include "DiamondTile.h"
 
 class TileSetTile
 {
@@ -19,6 +20,7 @@ public:
     TileSetTile* tileLeft;
     TileSetTile* tileRight;
     bool isOccupied;
+    DiamondTile* mOwnerTile;
 };
 
 #endif /* defined(__IOCWall__TileSetTile__) */

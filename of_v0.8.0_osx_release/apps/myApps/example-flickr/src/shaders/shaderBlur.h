@@ -26,7 +26,7 @@ class shaderBlur{
 
 		ofFbo fbo1, fbo2;
 		
-    float divAmount;
+        float divAmount;
 		float blurDistance;
 		int noPasses;
 };

@@ -29,6 +29,7 @@ void BVCWallApp::keyPressed(int key)
 
 void BVCWallApp::mousePressed(int x, int y, int button)
 {
+    mTileLayer.startRandomTileSpin();
     cout << "mousePressed: " << x << ", " << y << " button: " << button << endl;
 }
 

@@ -29,15 +29,16 @@ class TileLayer
 
     ofVec2f mMouseXY;
     
+    bool mRedOrYellow;
 public:
     
     TileLayer();
     void testURL();
     void update();
     void draw();
-    void generateTiles(int numImages);
-    void loadImages(std::vector<std::string> imgUrlVector);
+    void generateTiles();
     void setMouseXY(int x, int y);
+    void startRandomTileSpin();
 };
 
 #endif /* defined(__BVCWall__TileLayer__) */

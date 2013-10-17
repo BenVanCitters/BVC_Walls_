@@ -24,7 +24,8 @@ public:
     
     TileSetter();
     TileSetter(int width, int height);
-    bool getNewRect(ofVec2f* pos, ofVec2f* sz);
+    bool getNewRect(ofVec2f * pos, ofVec2f* sz, std::vector<TileSetTile*>* tilesPieces);
+    void findNeighbors();
 };
 
 #endif /* defined(__IOCWall__TileSetter__) */
