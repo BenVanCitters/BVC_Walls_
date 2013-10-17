@@ -12,21 +12,24 @@
 
 TileLayer::TileLayer():mTileSetter(30,35)
 {
+    ofSetWorkingDirectoryToDefault();
     ofSeedRandom();
-//	buildDiamondMesh();
-	
-//    testURL();
+
 	generateTiles(600);
     
     vidGrabber.setDeviceID(0);
     vidGrabber.setVerbose(true);
     vidGrabber.setDesiredFrameRate(60);
 	vidGrabber.initGrabber(1280,720);
+    blur.setup(1024, 768);
 }
 
 
 void TileLayer::draw()
 {
+    blur.setBlurParams(4, (float)mMouseXY.x / 100, 25);//(float)mMouseXY.y / 10);
+	blur.beginRender();
+    
     ofEnableDepthTest();
     
 	ofBackground(255,255,255);
@@ -46,6 +49,10 @@ void TileLayer::draw()
     vidGrabber.getTextureReference().unbind();
     ofDisableDepthTest();
     ofDisableNormalizedTexCoords();
+    blur.endRender();
+	blur.draw(0, 0, 1024, 768, true);
+    
+    
     // draw the framerate in the top left corner
 	ofDrawBitmapString(ofToString((int) ofGetFrameRate()) + " fps", 10, 20);
 }
@@ -84,7 +91,6 @@ void TileLayer::generateTiles(int numImages)
             mTiles.push_back(tile);
         }
     }
-
 }
 
 void TileLayer::loadImages(std::vector<std::string> imgUrlVector)
@@ -94,6 +100,7 @@ void TileLayer::loadImages(std::vector<std::string> imgUrlVector)
 
 void TileLayer::setMouseXY(int x, int y)
 {
+    mMouseXY = ofVec2f(x,y);
     for(int i=0; i<mTiles.size(); i++)
     {
         mTiles[i].updateMouse(x, y);

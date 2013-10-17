@@ -89,7 +89,7 @@ void DiamondTile::draw(int i)
         ofTranslate(mPos); // position the current mesh
 //        ofTranslate(i*55%winWidth, 200+i*5%winHeight); // position the current mesh
 //        ofRotateX((ofGetElapsedTimef() +i)* 30); // slowly rotate the model
-//        ofRotateZ((ofGetElapsedTimef() +i*1.1)* 10);
+        ofRotateZ((ofGetElapsedTimef() +i*1.1)* 10);
 
 //        ofTranslate(mPos); // position the current mesh
 //        ofRotateX((ofGetElapsedTimef())* 30); // slowly rotate the model

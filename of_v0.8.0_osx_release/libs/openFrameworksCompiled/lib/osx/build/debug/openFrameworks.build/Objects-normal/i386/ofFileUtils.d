@@ -1,5 +1,5 @@
 dependencies: \
-  /Users/admin/IOC_Walls/of_v0.8.0_osx_release/libs/openFrameworks/utils/ofFileUtils.cpp \
+  /Users/benvancitters/BVC_Walls/of_v0.8.0_osx_release/libs/openFrameworks/utils/ofFileUtils.cpp \
   ../../../../libs/openFrameworks/utils/ofFileUtils.h \
   ../../../../libs/openFrameworks/utils/ofConstants.h \
   ../../../../libs/glew/include/GL/glew.h \
@@ -15,11 +15,11 @@ dependencies: \
   ../../../../libs/poco/include/Poco/File_UNIX.h \
   ../../../../libs/openFrameworks/utils/ofUtils.h \
   ../../../../libs/openFrameworks/utils/ofLog.h \
-  /Users/admin/IOC_Walls/of_v0.8.0_osx_release/libs/openFrameworksCompiled/project/osx/../../../openFrameworks/types/ofTypes.h \
+  /Users/benvancitters/BVC_Walls/of_v0.8.0_osx_release/libs/openFrameworksCompiled/project/osx/../../../openFrameworks/types/ofTypes.h \
   ../../../../libs/openFrameworks/types/ofColor.h \
-  /Users/admin/IOC_Walls/of_v0.8.0_osx_release/libs/openFrameworksCompiled/project/osx/../../../openFrameworks/math/ofMath.h \
-  /Users/admin/IOC_Walls/of_v0.8.0_osx_release/libs/openFrameworksCompiled/project/osx/../../../openFrameworks/types/ofPoint.h \
-  /Users/admin/IOC_Walls/of_v0.8.0_osx_release/libs/openFrameworksCompiled/project/osx/../../../openFrameworks/math/ofVec3f.h \
+  /Users/benvancitters/BVC_Walls/of_v0.8.0_osx_release/libs/openFrameworksCompiled/project/osx/../../../openFrameworks/math/ofMath.h \
+  /Users/benvancitters/BVC_Walls/of_v0.8.0_osx_release/libs/openFrameworksCompiled/project/osx/../../../openFrameworks/types/ofPoint.h \
+  /Users/benvancitters/BVC_Walls/of_v0.8.0_osx_release/libs/openFrameworksCompiled/project/osx/../../../openFrameworks/math/ofVec3f.h \
   ../../../../libs/openFrameworks/math/ofVec2f.h \
   ../../../../libs/openFrameworks/math/ofVec4f.h \
   ../../../../libs/poco/include/Poco/Mutex.h \

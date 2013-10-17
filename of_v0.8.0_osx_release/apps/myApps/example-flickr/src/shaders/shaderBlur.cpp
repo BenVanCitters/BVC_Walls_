@@ -15,11 +15,13 @@ void shaderBlur::setup(int fboW, int fboH){
 	ofBackground(255,255,255);	
 	ofSetVerticalSync(true);
 	
-	fbo1.allocate(fboW, fboH, true);
-	fbo2.allocate(fboW, fboH, true);
-	
-	shaderH.loadShader("shaders/simpleBlurHorizontal");
-	shaderV.loadShader("shaders/simpleBlurVertical");
+	fbo1.allocate(fboW, fboH);//, GL_RGB16F_ARB);
+	fbo2.allocate(fboW, fboH);//, GL_RGB16F_ARB);
+    // need to figure out filenames
+	shaderH.load("shaders/simpleBlurHorizontal.vert",
+                 "shaders/simpleBlurHorizontal.frag");
+	shaderV.load("shaders/simpleBlurVertical.vert",
+                 "shaders/simpleBlurVertical.frag");
 
 	noPasses = 1;
 	blurDistance = 2.0;
@@ -27,25 +29,25 @@ void shaderBlur::setup(int fboW, int fboH){
 
 //--------------------------------------------------------------
 void shaderBlur::beginRender(){
-	fbo1.swapIn();
-	
+	fbo1.bind();
 }
 
 //--------------------------------------------------------------
 void shaderBlur::endRender(){
-	fbo1.swapOut();
+	fbo1.unbind();
 }
 
 //--------------------------------------------------------------
-void shaderBlur::setBlurParams(int numPasses, float blurDist){
+void shaderBlur::setBlurParams(int numPasses, float blurDist, float dvAmt){
 	noPasses		= ofClamp(numPasses, 1, 100000);
 	blurDistance	= blurDist;
+    divAmount = dvAmt;
 }
 
 //--------------------------------------------------------------
 void shaderBlur::draw(float x, float y, float w, float h, bool useShader){
 	
-	ofxFBOTexture * src, * dst;
+	ofFbo * src, * dst;
 	src = &fbo1;
 	dst = &fbo2;
 
@@ -54,32 +56,28 @@ void shaderBlur::draw(float x, float y, float w, float h, bool useShader){
 		for(int i = 0; i < noPasses; i++){
 			float blurPer =  blurDistance * ofMap(i, 0, noPasses, 1.0/noPasses, 1.0);
 			
-			//first the horizontal shader 
-			shaderH.setShaderActive(true);
-			shaderH.setUniformVariable1f("blurAmnt", blurDistance);
-			
-			dst->swapIn();
-						
+			//first the horizontal shader
+			dst->begin();
+            shaderH.begin();
+            shaderH.setUniform1f("blurAmnt", blurDistance);
+            shaderH.setUniform1f("divAmt", divAmount);
 			src->draw(0, 0);
-			dst->swapOut();
-			
-			shaderH.setShaderActive(false);
-			
-			//now the vertical shader
-			shaderV.setShaderActive(true);	
-			shaderV.setUniformVariable1f("blurAmnt", blurDistance);
-					
-			src->swapIn();
+			shaderH.end();
+			dst->end();
+            
+             //now the vertical shader
+			src->begin();
+			shaderV.begin();
+            shaderV.setUniform1f("divAmt", divAmount);
+			shaderV.setUniform1f("blurAmnt", blurDistance);
 			dst->draw(0,0);
-			src->swapOut();
-			
-			shaderV.setShaderActive(false);
-			
-//			ofxFBOTexture  * tmp = src;
-//			src = dst;
-//			dst = tmp;
-		}		
-		
+			shaderV.end();
+			src->end();
+            
+			ofFbo  * tmp = src;
+			src = dst;
+			dst = tmp;
+		}
 	}
 	
 	ofEnableAlphaBlending();	
