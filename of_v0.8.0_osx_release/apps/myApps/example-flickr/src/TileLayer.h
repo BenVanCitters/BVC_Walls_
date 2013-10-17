@@ -13,6 +13,7 @@
 #include "DiamondTile.h"
 #include "ofxThreadedImageLoader.h"
 #include "TileSetter.h"
+#include "shaderBlur.h"
 
 #include <iostream>
 
@@ -24,6 +25,10 @@ class TileLayer
     TileSetter mTileSetter;
     ofVideoGrabber vidGrabber;
     ofTexture videoTexture;
+    shaderBlur blur;
+
+    ofVec2f mMouseXY;
+    
 public:
     
     TileLayer();

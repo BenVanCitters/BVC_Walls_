@@ -54,6 +54,7 @@ void DiamondTile::setupMesh(ofVec2f currentDim)
     {
         mVboMesh.addVertex(pos[i]);
         pos[i] += mPos;
+        //convert screen-space to normalized texture-space.
         mVboMesh.addTexCoord(ofVec2f(pos[i].x/wxh.x, pos[i].y/wxh.y));
         mVboMesh.addNormal(ofVec3f(0,0,1));
     }

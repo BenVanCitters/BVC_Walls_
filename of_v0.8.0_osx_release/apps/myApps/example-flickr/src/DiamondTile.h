@@ -13,6 +13,8 @@
 #include "ofMain.h"
 #include "ofxThreadedImageLoader.h"
 
+enum DiamondTileState { ALPHA, BETA, GAMMA };
+
 class DiamondTile
 {
 private:
