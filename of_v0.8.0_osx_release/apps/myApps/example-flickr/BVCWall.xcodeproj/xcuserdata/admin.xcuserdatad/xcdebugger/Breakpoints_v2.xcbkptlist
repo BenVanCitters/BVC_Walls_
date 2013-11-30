@@ -41,7 +41,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
             endingLineNumber = "113"
-            landmarkName = "DiamondTile::buildDiamondMesh()"
+            landmarkName = "DiamondTile::updateMouse(int xDim, int yDim)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,7 +57,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
             endingLineNumber = "18"
-            landmarkName = "DiamondTile::DiamondTile(ofVec3f pos, ofVec2f startDim, ofVec2f endDim)"
+            landmarkName = "DiamondTile::DiamondTile(ofVec3f pos, ofVec2f startDim)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -72,9 +72,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "DiamondTile::update(float tm)"
-            landmarkType = "5">
+            endingLineNumber = "30">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -100,12 +98,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/TileSetter.cpp"
-            timestampString = "403421074.436073"
+            timestampString = "403727489.148247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz, std::vector&lt;TileSetTile*&gt;* tilesPieces)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -116,12 +114,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/TileSetter.cpp"
-            timestampString = "403421026.869086"
+            timestampString = "403727489.148247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz, std::vector&lt;TileSetTile*&gt;* tilesPieces)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -132,12 +130,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/TileSetter.cpp"
-            timestampString = "403421026.869086"
+            timestampString = "403727489.148247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz, std::vector&lt;TileSetTile*&gt;* tilesPieces)"
             landmarkType = "5">
             <Locations>
                <Location
@@ -178,13 +176,57 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/TileSetter.cpp"
-            timestampString = "403419401.693333"
+            timestampString = "403727489.148247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz, std::vector&lt;TileSetTile*&gt;* tilesPieces)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TileSetter::getNewRect(ofVec2f*, ofVec2f*, std::vector&lt;TileSetTile*, std::allocator&lt;TileSetTile*&gt; &gt;*)"
+                  moduleName = "IOCWall"
+                  urlString = "file://localhost/Users/admin/BVC_Walls/of_v0.8.0_osx_release/apps/myApps/example-flickr/src/TileSetter.cpp"
+                  timestampString = "403727489.165046"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "292">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TileSetter::getNewRect(ofVec2f*, ofVec2f*, std::vector&lt;TileSetTile*, std::allocator&lt;TileSetTile*&gt; &gt;*)"
+                  moduleName = "IOCWall"
+                  urlString = "file://localhost/Users/admin/BVC_Walls/of_v0.8.0_osx_release/apps/myApps/example-flickr/src/TileSetter.cpp"
+                  timestampString = "403727489.165618"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "370">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TileSetter::getNewRect(ofVec2f*, ofVec2f*, std::vector&lt;TileSetTile*, std::allocator&lt;TileSetTile*&gt; &gt;*)"
+                  moduleName = "IOCWall"
+                  urlString = "file://localhost/Users/admin/BVC_Walls/of_v0.8.0_osx_release/apps/myApps/example-flickr/src/TileSetter.cpp"
+                  timestampString = "403727489.169008"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "624">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -210,7 +252,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/TileSetter.cpp"
-            timestampString = "403419459.227441"
+            timestampString = "403727075.854166"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "22"
@@ -226,12 +268,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/TileSetter.cpp"
-            timestampString = "403421022.813787"
+            timestampString = "403727489.148247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz)"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz, std::vector&lt;TileSetTile*&gt;* tilesPieces)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

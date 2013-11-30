@@ -16,6 +16,7 @@
 class TileSetter
 {
 private:
+    std::set<TileSetTile*> availableTiles;
     std::vector<std::vector<TileSetTile> > tiles;
 public:
     int mWidth;

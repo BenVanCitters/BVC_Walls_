@@ -23,6 +23,11 @@ TileSetter::TileSetter(int width, int height)
     for(int i = 0; i < tiles.size(); i++)
     {
         tiles[i].resize(mWidth);
+    }
+    
+    
+    for(int i = 0; i < tiles.size(); i++)
+    {
         for(int j = 0; j < tiles[i].size(); j++)
         {
             tiles[i][j].tileRight = NULL;
@@ -30,18 +35,25 @@ TileSetter::TileSetter(int width, int height)
             tiles[i][j].tileLeft = NULL;
             tiles[i][j].tileBelow= NULL;
             tiles[i][j].mOwnerTile = NULL;
-            if(i > 0)
+//            if(i > 0)
             {
-                tiles[i][j].tileAbove = &tiles[i-1][j];
-                tiles[i-1][j].tileBelow = &tiles[i][j];
-                if(j < tiles[i].size()-1)
+                int otherIIndex = (i-1+tiles.size())%tiles.size();
+                tiles[i][j].tileAbove = &tiles[otherIIndex][j];
+                tiles[otherIIndex][j].tileBelow = &tiles[i][j];
+//                if(j < tiles[i].size()-1)
                 {
-                    tiles[i][j].tileRight = &tiles[i-1][j+1];
-                    tiles[i-1][j+1].tileRight = &tiles[i][j];
+                int otherJIndex = (j+1+tiles[i].size())%tiles[i].size();
+                    tiles[i][j].tileRight = &tiles[otherIIndex][otherJIndex];
+                    tiles[otherIIndex][otherJIndex].tileRight = &tiles[i][j];
                 }
             }
         }
     }
+    for(int i = 0; i < tiles.size(); i++)
+        for(int j = 0; j < tiles[i].size(); j++)
+        {
+            availableTiles.insert(&tiles[i][j]);
+        }
 }
 
 //
@@ -50,6 +62,8 @@ bool TileSetter::getNewRect(ofVec2f * pos, ofVec2f* sz, std::vector<TileSetTile*
     //find an empty starting space;
     ofVec2f newPos;
     bool foundAnEmpty = false;
+//    availableTiles.
+    
     for(int i = 0; i < tiles.size() && !foundAnEmpty; i++)
         for(int j = 0; j < tiles[i].size() && !foundAnEmpty; j++)
         {
