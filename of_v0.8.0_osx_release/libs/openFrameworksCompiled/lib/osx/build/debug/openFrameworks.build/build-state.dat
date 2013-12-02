@@ -4423,7 +4423,7 @@ r0
 
 CCheck dependencies
 r0
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependencies4ed5954b4f48b841^215b964b4f48b841^---0#1#1#--18"Check dependencies36"84AA3767-AE6E-4068-9804-12D2E24B33C9-
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependencies7f34ac610f4cb841^331aad610f4cb841^---0#1#1#--18"Check dependencies36"CC080201-6488-480D-83B2-8244A12A73D3-
 
 CCompileC ../../lib/osx/build/debug/openFrameworks.build/Objects-normal/i386/of3dGraphics.o /Users/admin/BVC_Walls/of_v0.8.0_osx_release/libs/openFrameworks/graphics/of3dGraphics.cpp normal i386 c++ com.apple.compilers.llvm.clang.1_0.compiler
 s406579046.635733

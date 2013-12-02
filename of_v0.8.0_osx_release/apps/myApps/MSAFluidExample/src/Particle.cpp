@@ -53,7 +53,7 @@ void Particle::update( const msa::fluid::Solver &solver, const ofVec2f &windowSi
 //	}
 	
 	// fade out a bit (and kill if alpha == 0);
-	alpha *= 0.999f;
+//	alpha *= 0.999f;
 	if( alpha < 0.01f )
 		alpha = 0;
 }

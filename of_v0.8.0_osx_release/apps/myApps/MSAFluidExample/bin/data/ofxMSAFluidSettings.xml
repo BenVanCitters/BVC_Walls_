@@ -1,7 +1,7 @@
 <controls>
     <SliderInt_fluidCellsX>
         <name>fluidCellsX</name>
-        <value>56</value>
+        <value>69</value>
     </SliderInt_fluidCellsX>
     <Button_resizeFluid>
         <name>resizeFluid</name>
@@ -9,31 +9,31 @@
     </Button_resizeFluid>
     <SliderFloat_colorMult>
         <name>colorMult</name>
-        <value>79.000000000</value>
+        <value>6.000000000</value>
     </SliderFloat_colorMult>
     <SliderFloat_velocityMult>
         <name>velocityMult</name>
-        <value>60.500000000</value>
+        <value>6.500000000</value>
     </SliderFloat_velocityMult>
     <SliderFloat_fs.viscocity>
         <name>fs.viscocity</name>
-        <value>0.000300000</value>
+        <value>0.000150000</value>
     </SliderFloat_fs.viscocity>
     <SliderFloat_fs.colorDiffusion>
         <name>fs.colorDiffusion</name>
-        <value>0.000006000</value>
+        <value>0.000003000</value>
     </SliderFloat_fs.colorDiffusion>
     <SliderFloat_fs.fadeSpeed>
         <name>fs.fadeSpeed</name>
-        <value>0.021500001</value>
+        <value>0.007000000</value>
     </SliderFloat_fs.fadeSpeed>
     <SliderInt_fs.solverIterations>
         <name>fs.solverIterations</name>
-        <value>15</value>
+        <value>8</value>
     </SliderInt_fs.solverIterations>
     <SliderFloat_fs.deltaT>
         <name>fs.deltaT</name>
-        <value>4.412000179</value>
+        <value>0.639000058</value>
     </SliderFloat_fs.deltaT>
     <ComboBox_fd.drawMode>
         <name>fd.drawMode</name>
@@ -53,15 +53,15 @@
     </Toggle_drawFluid>
     <Toggle_drawParticles>
         <name>drawParticles</name>
-        <value>0</value>
+        <value>1</value>
     </Toggle_drawParticles>
     <Toggle_fs.wrapX>
         <name>fs.wrapX</name>
-        <value>1</value>
+        <value>0</value>
     </Toggle_fs.wrapX>
     <Toggle_fs.wrapY>
         <name>fs.wrapY</name>
-        <value>1</value>
+        <value>0</value>
     </Toggle_fs.wrapY>
     <SliderFloat_tuioXScaler>
         <name>tuioXScaler</name>
